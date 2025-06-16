@@ -1,7 +1,4 @@
-const express = require("express");
-const router = express.Router();
 const Grocery = require("../models/Grocery");
-const { authMiddleware, staffMiddleware } = require("../middleware/authMiddleware");
 
 
 // get Groceries data

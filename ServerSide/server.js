@@ -4,6 +4,8 @@ const connectDB = require('./config/db');
 const bookingRoutes = require('./routes/bookingRoutes');
 const authRoutes = require('./routes/authRoutes');
 const groceryRoutes = require('./routes/groceryRoutes');
+const menuRoutes = require('./routes/menuRoutes');
+const salaryRoutes = require('./routes/salaryRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -17,8 +19,8 @@ connectDB();
 
 // Routes
 app.use("/api/bookings", bookingRoutes);
-// app.use("/api/menu", menuRoutes);
-// app.use("/api/salary", salaryRoutes);
+app.use("/api/menu", menuRoutes);
+app.use("/api/salary", salaryRoutes);
 app.use("/api/grocery", groceryRoutes);
 app.use("/api/auth", authRoutes);
 

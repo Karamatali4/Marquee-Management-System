@@ -1,17 +1,34 @@
-const express = require("express");
-const router = express.Router();
 const Salary = require("../models/Salary");
-const { authMiddleware, staffMiddleware } = require("../middleware/authMiddleware");
 
-router.get("/", authMiddleware, staffMiddleware, async (req, res) => {
-  const salaries = await Salary.find();
+
+// get Salary Data
+const getSalaryData =  async (req, res) => {
+  try {
+    const salaries = await Salary.find();
+  console.log("");
   res.json(salaries);
-});
 
-router.post("/", authMiddleware, staffMiddleware, async (req, res) => {
-  const newSalary = new Salary(req.body);
+  } catch (error) {
+    console.log(error);
+  }
+  
+};
+
+// create Salary Data
+
+const createSalaryData=  async (req, res) => {
+  try {
+    
+    const newSalary = new Salary(req.body);
   await newSalary.save();
+  console.log("");
   res.status(201).json(newSalary);
-});
 
-module.exports = router;
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
+};
+
+module.exports = {getSalaryData,createSalaryData};

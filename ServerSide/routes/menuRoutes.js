@@ -1,12 +1,9 @@
 const express = require("express");
-const router = express.Router();
-const Menu = require("../models/Menu");
+const menuRoutes = express.Router();
 const { authMiddleware, staffMiddleware } = require("../middleware/authMiddleware");
+const createMenuData = require("../controllers/menuController");
 
-router.post("/", authMiddleware, staffMiddleware, async (req, res) => {
-  const newMenu = new Menu(req.body);
-  await newMenu.save();
-  res.status(201).json(newMenu);
-});
 
-module.exports = router;
+menuRoutes.post("/", authMiddleware, staffMiddleware,createMenuData );
+
+module.exports = menuRoutes;

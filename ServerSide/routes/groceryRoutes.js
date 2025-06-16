@@ -1,6 +1,5 @@
 const express = require("express");
 const groceryRoutes = express.Router();
-const Grocery = require("../models/Grocery");
 const { authMiddleware, staffMiddleware } = require("../middleware/authMiddleware");
 const { createGroceryData, getGroceryData } = require("../controllers/groceryController");
 
