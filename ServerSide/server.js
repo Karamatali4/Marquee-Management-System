@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const bookingRoutes = require('./routes/bookingRoutes');
+const authRoutes = require('./routes/authRoutes');
+const groceryRoutes = require('./routes/groceryRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -17,7 +19,7 @@ connectDB();
 app.use("/api/bookings", bookingRoutes);
 // app.use("/api/menu", menuRoutes);
 // app.use("/api/salary", salaryRoutes);
-// app.use("/api/grocery", groceryRoutes);
+app.use("/api/grocery", groceryRoutes);
 app.use("/api/auth", authRoutes);
 
 // DB and Server Start
