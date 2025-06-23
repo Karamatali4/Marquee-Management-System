@@ -15,7 +15,8 @@ const login = async (req, res) => {
       { id: user._id, role: user.role },
       process.env.JWT_SECRET
     );
-    res.json({ token, role: user.role });
+    const {username:userName} = user;
+    res.status(200).json({ msg:"Login Successfully ... ",userName,token, role: user.role });
     console.log("Login Successfully....");
   } catch (error) {
     console.log(error);
@@ -30,7 +31,7 @@ const register = async (req, res) => {
     await newUser.save();
     console.log("Registration Successfully....");
 
-    res.status(201).json({ msg: newUser });
+    res.status(201).json({ msg:"Registration Successfully....", newUser });
   } catch (error) {
     console.log(error);
   }
