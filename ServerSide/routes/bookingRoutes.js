@@ -9,9 +9,9 @@ const {
   bookingSetData,
 } = require("../controllers/bookingController");
 
-// for
+// for booking routes
 bookingRoutes.get("/", authMiddleware, staffMiddleware, bookingData);
 
-bookingRoutes.post("/", authMiddleware, staffMiddleware, bookingSetData);
+bookingRoutes.post("/",authMiddleware, bookingSetData,staffMiddleware); // authMiddleware, staffMiddleware
 
 module.exports = bookingRoutes;

@@ -6,6 +6,6 @@ const {
 } = require("../middleware/authMiddleware");
 const createMenuData = require("../controllers/menuController");
 
-menuRoutes.post("/", authMiddleware, staffMiddleware, createMenuData);
+menuRoutes.post("/",authMiddleware,  createMenuData);  //staffMiddleware,
 
 module.exports = menuRoutes;
