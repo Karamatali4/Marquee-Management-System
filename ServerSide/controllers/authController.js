@@ -25,9 +25,9 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { username,name,email,gender,phone, password} = req.body;
+    const { username,name,email,gender,phone, password,role} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({  username,name,email,gender,phone, password: hashedPassword});
+    const newUser = new User({  username,name,email,gender,phone, password: hashedPassword,role});
     await newUser.save();
     console.log("Registration Successfully....");
 

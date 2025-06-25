@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema(
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
     phone: { type: String, required: true, match: /^[0-9]{10,15}$/ },
     password: { type: String, required: true },
-    isAdmin: { type: Boolean, enum: [false, true], default: false },
+    role: { type: String, enum: ["admin", "staff"] },
+    // isAdmin: { type: Boolean, enum: [false, true], default: false },
   },
   { timestamps: true }
 );

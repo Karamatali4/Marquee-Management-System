@@ -4,9 +4,10 @@ const {
   authMiddleware,
   staffMiddleware,
 } = require("../middleware/authMiddleware");
+const { createSalaryData, getSalaryData } = require("../controllers/salryController");
 
-salaryRoutes.get("/", authMiddleware, staffMiddleware);
+salaryRoutes.get("/", authMiddleware, staffMiddleware,getSalaryData);
 
-salaryRoutes.post("/", authMiddleware, staffMiddleware);
+salaryRoutes.post("/", authMiddleware, staffMiddleware,createSalaryData);
 
 module.exports = salaryRoutes;

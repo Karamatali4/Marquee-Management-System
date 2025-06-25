@@ -19,7 +19,7 @@ const createGroceryData = async (req, res) => {
     const newGrocery = new Grocery(req.body);
     await newGrocery.save();
     res.status(201).json({ msg: newGrocery });
-    console.log("Groceries data Successfully add : ", groceries);
+    console.log("Groceries data Successfully add : ", newGrocery);
   } catch (error) {
     console.log(error);
   }
