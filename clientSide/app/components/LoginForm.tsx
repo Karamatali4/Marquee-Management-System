@@ -1,5 +1,5 @@
 // 📁 frontend/app/components/LoginForm.tsx
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 interface ActionData {
   error?: string;
@@ -14,6 +14,7 @@ export default function LoginForm({ error }: ActionData) {
         <input name="password" type="password" placeholder="Password" className="mb-2 w-full border p-2" />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 w-full">Login</button>
         {error && <p className="text-red-500 mt-2">{error}</p>}
+        <p>Don't have an account yet? <Link to={"/register"} className="text-blue-700"> Register here. </Link></p>
       </Form>
     </div>
   );
