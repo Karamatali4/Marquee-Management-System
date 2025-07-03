@@ -1,5 +1,5 @@
 // 📁 frontend/app/components/RegisterForm.tsx
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 
 interface ActionData {
   error?: string;
@@ -68,6 +68,8 @@ export default function RegisterForm({ error }: ActionData) {
         </button>
 
         {error && <p className="text-red-500 mt-2">{error}</p>}
+      <p>I want to log in<Link to={"/login"} className="text-blue-700"> Login here. </Link></p>
+
       </Form>
     </div>
   );
