@@ -1,7 +1,8 @@
 const express = require("express");
 const {
   authMiddleware,
-  adminMiddleware
+  adminMiddleware,
+  adminOnly,
 } = require("../middleware/authMiddleware");
 
 const {
@@ -17,7 +18,9 @@ const {
   deleteMenu,
   updateMenu,
   deleteSalary,
-  updateSalary
+  updateSalary,
+  deleteUser,
+  updateUser,
 } = require("../controllers/adminController");
 
 const adminRoutes = express.Router();
@@ -26,44 +29,73 @@ const adminRoutes = express.Router();
 adminRoutes.use(authMiddleware);
 adminRoutes.use(adminMiddleware);
 
-adminRoutes.get("/users",adminMiddleware, getAllUsers);
-adminRoutes.get("/salaries",adminMiddleware, getAllSalaries);
-
-
-
-        //  *****************   Booking section ******************
-
-        // get all booking data
-adminRoutes.get("/bookings",adminMiddleware, getAllBookings);
+//  *****************   Users section ******************
+adminRoutes.get("/users", adminMiddleware, getAllUsers);
 
 // Admin-only: delete a booking
-adminRoutes.delete("/bookings/:id", authMiddleware, adminMiddleware, deleteBooking);
+adminRoutes.delete(
+  "/users/:id",
+
+  adminMiddleware,
+  adminOnly,
+  deleteUser
+);
 
 // Optionally allow update
-adminRoutes.put("/bookings/:id", authMiddleware, adminMiddleware, updateBooking);
+adminRoutes.put(
+  "/users/:id",
 
+  adminMiddleware,
+  adminOnly,
+  updateUser
+);
 
-        //  *****************   Grocery section ******************
+//  *****************   Booking section ******************
 
-        // get all grocerie data
-adminRoutes.get("/groceries",adminMiddleware, getAllGroceries);
+// get all booking data
+adminRoutes.get("/bookings", adminMiddleware, getAllBookings);
 
+// Admin-only: delete a booking
+adminRoutes.delete(
+  "/bookings/:id",
+  authMiddleware,
+  adminMiddleware,
+  deleteBooking
+);
+
+// Optionally allow update
+adminRoutes.put(
+  "/bookings/:id",
+  authMiddleware,
+  adminMiddleware,
+  updateBooking
+);
+
+//  *****************   Grocery section ******************
+
+// get all grocerie data
+adminRoutes.get("/groceries", adminMiddleware, getAllGroceries);
 
 //  delete a grocerie
-adminRoutes.delete("/groceries/:id", authMiddleware, adminMiddleware, deleteGrocery);
+adminRoutes.delete(
+  "/groceries/:id",
+  authMiddleware,
+  adminMiddleware,
+  deleteGrocery
+);
 
 // Optionally allow update groceries single data
-adminRoutes.put("/groceries/:id", authMiddleware, adminMiddleware, updateGrocery);
-
-  
-
+adminRoutes.put(
+  "/groceries/:id",
+  authMiddleware,
+  adminMiddleware,
+  updateGrocery
+);
 
 //  *****************   Menu section ******************
 
-        // get all Menu data
-adminRoutes.get("/menu",adminMiddleware, getAllMenus);
-
-
+// get all Menu data
+adminRoutes.get("/menu", adminMiddleware, getAllMenus);
 
 //  delete a menu
 adminRoutes.delete("/menu/:id", authMiddleware, adminMiddleware, deleteMenu);
@@ -71,20 +103,22 @@ adminRoutes.delete("/menu/:id", authMiddleware, adminMiddleware, deleteMenu);
 // Optionally allow update menu single data
 adminRoutes.put("/menu/:id", authMiddleware, adminMiddleware, updateMenu);
 
-
-
 //  *****************   Salary section ******************
 
-        // get all Menu data
-adminRoutes.get("/salaries",adminMiddleware, getAllMenus);
+// get all Salary data
+adminRoutes.get("/salaries", adminMiddleware, getAllSalaries);
 
-
+adminRoutes.get("/salaries", adminMiddleware, getAllSalaries);
 
 //  delete a Salary
-adminRoutes.delete("/salaries/:id", authMiddleware, adminMiddleware, deleteSalary);
+adminRoutes.delete(
+  "/salaries/:id",
+  authMiddleware,
+  adminMiddleware,
+  deleteSalary
+);
 
 // Optionally allow update Salary single data
 adminRoutes.put("/salaries/:id", authMiddleware, adminMiddleware, updateSalary);
-
 
 module.exports = adminRoutes;

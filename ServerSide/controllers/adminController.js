@@ -1,86 +1,70 @@
-
 const Booking = require("../models/Booking");
 const Grocery = require("../models/Grocery");
 const Menu = require("../models/Menu");
 const Salary = require("../models/Salary");
 const User = require("../models/User");
 
-
-
-// get all Menu data 
+//  *****************   Users section ******************
+// get all user data
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.status(200).json({msg:`Users: ${users}`})
-  console.log("All User: ", users)
+    res.status(200).json({ msg: `Users: ${users}` });
+    console.log("All User: ", users);
   } catch (error) {
-    res.status(500).json({msg:error});
+    res.status(500).json({ msg: error });
   }
-  
 };
 
+// DELETE user (Admin Only)
+const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: "user not found" });
+    }
+    res.status(200).json({ msg: "user deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
-// get all Booking data 
+// UPDATE user (Admin Only)
+const updateUser = async (req, res) => {
+  try {
+    const updateduser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updateduser) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    res.status(200).json({
+      msg: "Booking updated successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating booking:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+//  *****************   Booking section ******************
+// get all Booking data
 
 const getAllBookings = async (req, res) => {
-  
   try {
     const bookings = await Booking.find();
-    res.status(200).json({msg:`bookings: ${bookings}`})
-  console.log("All Bookings: ", bookings)
+    res.status(200).json({ msg: `bookings: ${bookings}` });
+    console.log("All Bookings: ", bookings);
   } catch (error) {
-    res.status(500).json({msg:error});
+    res.status(500).json({ msg: error });
   }
-
 };
-
-
-// get all Menu data 
-const getAllMenus = async (req, res) => {
-
-   try {
-    const menus = await Menu.find();
-    res.status(200).json({msg:`menus: ${menus}`})
-  console.log("All menus: ", menus)
-  } catch (error) {
-    res.status(500).json({msg:error});
-  }
-
-};
-
-
-// get all Salaries data 
-const getAllSalaries = async (req, res) => {
-
-
-  try {
-    const salaries = await Salary.find();
-    res.status(200).json({msg:`salaries: ${salaries}`})
-  console.log("All salaries: ", salaries)
-  } catch (error) {
-    res.status(500).json({msg:error});
-  }
-
-};
-
-
-// get all Groceries data 
-
-const getAllGroceries = async (req, res) => {
-
-  try {
-    const groceries = await Grocery.find();
-    res.status(200).json({msg:`groceries: ${groceries}`})
-  console.log("All groceries: ", groceries)
-  } catch (error) {
-    res.status(500).json({msg:error});
-  }
-
-
-};
-
-
 
 // DELETE Booking (Admin Only)
 const deleteBooking = async (req, res) => {
@@ -119,7 +103,19 @@ const updateBooking = async (req, res) => {
   }
 };
 
+//  *****************   Grocery section ******************
 
+// get all Groceries data
+
+const getAllGroceries = async (req, res) => {
+  try {
+    const groceries = await Grocery.find();
+    res.status(200).json({ msg: `groceries: ${groceries}` });
+    console.log("All groceries: ", groceries);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
 // DELETE grocery (Admin Only)
 const deleteGrocery = async (req, res) => {
@@ -158,10 +154,20 @@ const updateGrocery = async (req, res) => {
   }
 };
 
+//  *****************   Menu section ******************
 
+// get all Menu data
+const getAllMenus = async (req, res) => {
+  try {
+    const menus = await Menu.find();
+    res.status(200).json({ msg: `menus: ${menus}` });
+    console.log("All menus: ", menus);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
-
-// DELETE menu (Admin Only)
+// DELETE single menu
 const deleteMenu = async (req, res) => {
   try {
     const menu = await Menu.findByIdAndDelete(req.params.id);
@@ -178,11 +184,10 @@ const deleteMenu = async (req, res) => {
 // UPDATE menu (Admin Only)
 const updateMenu = async (req, res) => {
   try {
-    const updatedmenu = await   Menu.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
-    );
+    const updatedmenu = await Menu.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedmenu) {
       return res.status(404).json({ error: "menu not found" });
@@ -198,8 +203,18 @@ const updateMenu = async (req, res) => {
   }
 };
 
+//  *****************   Salary section ******************
 
-
+// get all Salaries data
+const getAllSalaries = async (req, res) => {
+  try {
+    const salaries = await Salary.find();
+    res.status(200).json({ msg: `salaries: ${salaries}` });
+    console.log("All salaries: ", salaries);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
 // DELETE Salary (Admin Only)
 const deleteSalary = async (req, res) => {
@@ -218,7 +233,7 @@ const deleteSalary = async (req, res) => {
 // UPDATE salary (Admin Only)
 const updateSalary = async (req, res) => {
   try {
-    const updatedsalary = await   Salary.findByIdAndUpdate(
+    const updatedsalary = await Salary.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
@@ -240,6 +255,8 @@ const updateSalary = async (req, res) => {
 
 module.exports = {
   getAllUsers,
+  deleteUser,
+  updateUser,
   getAllBookings,
   getAllMenus,
   getAllSalaries,
@@ -251,5 +268,5 @@ module.exports = {
   deleteMenu,
   updateMenu,
   deleteSalary,
-  updateSalary
+  updateSalary,
 };
