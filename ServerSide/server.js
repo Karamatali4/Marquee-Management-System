@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const groceryRoutes = require("./routes/groceryRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const salaryRoutes = require("./routes/salaryRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -29,6 +30,8 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/salary", salaryRoutes);
 app.use("/api/grocery", groceryRoutes);
 app.use("/api/auth", authRoutes);
+// only for admin
+app.use("/api/auth", adminRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
