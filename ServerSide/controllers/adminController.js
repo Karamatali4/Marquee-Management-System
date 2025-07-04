@@ -199,6 +199,45 @@ const updateMenu = async (req, res) => {
 };
 
 
+
+
+// DELETE Salary (Admin Only)
+const deleteSalary = async (req, res) => {
+  try {
+    const salary = await Salary.findByIdAndDelete(req.params.id);
+    if (!salary) {
+      return res.status(404).json({ error: "salary not found" });
+    }
+    res.status(200).json({ msg: "salary deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting salary:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// UPDATE salary (Admin Only)
+const updateSalary = async (req, res) => {
+  try {
+    const updatedsalary = await   Salary.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedsalary) {
+      return res.status(404).json({ error: "salary not found" });
+    }
+
+    res.status(200).json({
+      msg: "salary updated successfully",
+      salary: updatedsalary,
+    });
+  } catch (error) {
+    console.error("Error updating salary:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getAllBookings,
@@ -210,5 +249,7 @@ module.exports = {
   deleteGrocery,
   updateGrocery,
   deleteMenu,
-  updateMenu
+  updateMenu,
+  deleteSalary,
+  updateSalary
 };

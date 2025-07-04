@@ -15,7 +15,9 @@ const {
   deleteGrocery,
   updateGrocery,
   deleteMenu,
-  updateMenu
+  updateMenu,
+  deleteSalary,
+  updateSalary
 } = require("../controllers/adminController");
 
 const adminRoutes = express.Router();
@@ -59,7 +61,7 @@ adminRoutes.put("/groceries/:id", authMiddleware, adminMiddleware, updateGrocery
 //  *****************   Menu section ******************
 
         // get all Menu data
-adminRoutes.get("/menus",adminMiddleware, getAllMenus);
+adminRoutes.get("/menu",adminMiddleware, getAllMenus);
 
 
 
@@ -68,5 +70,21 @@ adminRoutes.delete("/menu/:id", authMiddleware, adminMiddleware, deleteMenu);
 
 // Optionally allow update menu single data
 adminRoutes.put("/menu/:id", authMiddleware, adminMiddleware, updateMenu);
+
+
+
+//  *****************   Salary section ******************
+
+        // get all Menu data
+adminRoutes.get("/salaries",adminMiddleware, getAllMenus);
+
+
+
+//  delete a Salary
+adminRoutes.delete("/salaries/:id", authMiddleware, adminMiddleware, deleteSalary);
+
+// Optionally allow update Salary single data
+adminRoutes.put("/salaries/:id", authMiddleware, adminMiddleware, updateSalary);
+
 
 module.exports = adminRoutes;

@@ -10,4 +10,6 @@ salaryRoutes.get("/", authMiddleware, staffMiddleware,getSalaryData);
 
 salaryRoutes.post("/", authMiddleware, staffMiddleware,createSalaryData);
 
+
+
 module.exports = salaryRoutes;

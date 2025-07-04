@@ -24,4 +24,8 @@ const createSalaryData = async (req, res) => {
   }
 };
 
+
+
+
+
 module.exports = { getSalaryData, createSalaryData };
