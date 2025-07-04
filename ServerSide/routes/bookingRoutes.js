@@ -3,15 +3,29 @@ const bookingRoutes = express.Router();
 const {
   authMiddleware,
   staffMiddleware,
+  adminMiddleware,
 } = require("../middleware/authMiddleware");
 const {
-  bookingData,
-  bookingSetData,
+
+  getAllBookingData,
+  createBooking,
+  getAllBookings,
+  deleteBooking,
+  updateBooking,
 } = require("../controllers/bookingController");
 
-// for booking routes
-bookingRoutes.get("/", authMiddleware, staffMiddleware, bookingData);
 
-bookingRoutes.post("/",authMiddleware, bookingSetData,staffMiddleware); // authMiddleware, staffMiddleware
+// for booking routes
+bookingRoutes.get("/", authMiddleware, staffMiddleware,adminMiddleware, getAllBookings);
+
+bookingRoutes.post("/",authMiddleware,staffMiddleware,adminMiddleware,createBooking); 
+
+
+
+//  delete a single booking
+bookingRoutes.delete("/bookings/:id", authMiddleware, adminMiddleware, deleteBooking);
+
+// Optionally allow single update
+bookingRoutes.put("/bookings/:id", authMiddleware, adminMiddleware, updateBooking);
 
 module.exports = bookingRoutes;
