@@ -202,6 +202,8 @@ const updateGrocery = async (req, res) => {
       msg: "Grocery updated successfully",
       Grocery: updatedGrocery,
     });
+    console.error(" updating Grocery:",updatedGrocery);
+
   } catch (error) {
     console.error("Error updating Grocery:", error);
     res.status(500).json({ error: "Server error" });
@@ -215,7 +217,7 @@ const getAllMenus = async (req, res) => {
   try {
     const menus = await Menu.find();
     res.status(200).json({ msg: `menus: ${menus}` });
-    console.log("All menus: ", menus);
+    console.log("All menus: ",{msg: `menus: ${menus}`});
   } catch (error) {
     res.status(500).json({ msg: error });
   }
@@ -230,7 +232,7 @@ const getSingleMenu = async (req, res) => {
     if (!menu) {
       return res.status(404).json({ error: "menu not found" });
     }
-    res.status(200).json({ msg: "get single menu successfully" });
+    res.status(200).json({ msg: "get single menu successfully",menu });
     console.error(" Get single menu", menu);
 
   } catch (error) {
@@ -246,6 +248,7 @@ const deleteMenu = async (req, res) => {
       return res.status(404).json({ error: "menu not found" });
     }
     res.status(200).json({ msg: "menu deleted successfully" });
+    console.log("menu deleted successfully");
   } catch (error) {
     console.error("Error deleting menu:", error);
     res.status(500).json({ error: "Server error" });
@@ -268,6 +271,7 @@ const updateMenu = async (req, res) => {
       msg: "menu updated successfully",
       menu: updatedmenu,
     });
+    console.log("updated menu: ",updatedmenu)
   } catch (error) {
     console.error("Error updating Menu:", error);
     res.status(500).json({ error: "Server error" });
