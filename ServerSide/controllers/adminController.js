@@ -81,6 +81,22 @@ const getAllBookings = async (req, res) => {
   }
 };
 
+
+// Get Single  Booking data
+const getSingleBookings = async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+    res.status(200).json({ msg: booking });
+    console.log("Get single Booking data",booking);
+  } catch (error) {
+    console.error("Error Get single  booking:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 // DELETE Booking (Admin Only)
 const deleteBooking = async (req, res) => {
   try {
@@ -89,6 +105,8 @@ const deleteBooking = async (req, res) => {
       return res.status(404).json({ error: "Booking not found" });
     }
     res.status(200).json({ msg: "Booking deleted successfully" });
+    console.error("deleting single booking:");
+
   } catch (error) {
     console.error("Error deleting booking:", error);
     res.status(500).json({ error: "Server error" });
@@ -112,6 +130,7 @@ const updateBooking = async (req, res) => {
       msg: "Booking updated successfully",
       booking: updatedBooking,
     });
+    console.log("Update Successfully..");
   } catch (error) {
     console.error("Error updating booking:", error);
     res.status(500).json({ error: "Server error" });
@@ -131,6 +150,26 @@ const getAllGroceries = async (req, res) => {
     res.status(500).json({ msg: error });
   }
 };
+
+
+
+
+// single grocery (Admin Only)
+const getSingleGrocery = async (req, res) => {
+  try {
+    const grocery = await Grocery.findById(req.params.id);
+    if (!grocery) {
+      return res.status(404).json({ error: "grocery not found" });
+    }
+    res.status(200).json({ msg: "get Single grocery  successfully",grocery });
+    console.error(" get Single  grocery:", grocery);
+
+  } catch (error) {
+    console.error("Error get Single  grocery:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 
 // DELETE grocery (Admin Only)
 const deleteGrocery = async (req, res) => {
@@ -182,6 +221,23 @@ const getAllMenus = async (req, res) => {
   }
 };
 
+
+
+// get single menu
+const getSingleMenu = async (req, res) => {
+  try {
+    const menu = await Menu.findById(req.params.id);
+    if (!menu) {
+      return res.status(404).json({ error: "menu not found" });
+    }
+    res.status(200).json({ msg: "get single menu successfully" });
+    console.error(" Get single menu", menu);
+
+  } catch (error) {
+    console.error("Error get single menu:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 // DELETE single menu
 const deleteMenu = async (req, res) => {
   try {
@@ -231,6 +287,25 @@ const getAllSalaries = async (req, res) => {
   }
 };
 
+
+
+
+// get single Salary (Admin Only)
+const getSingleSalaries = async (req, res) => {
+  try {
+    const salary = await Salary.findById(req.params.id);
+    if (!salary) {
+      return res.status(404).json({ error: "salary not found" });
+    }
+    res.status(200).json({ msg: "get Single salary  successfully" });
+    console.error("get single  salary:" , salary);
+
+  } catch (error) {
+    console.error("Error get single salary:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 // DELETE Salary (Admin Only)
 const deleteSalary = async (req, res) => {
   try {
@@ -273,15 +348,19 @@ module.exports = {
   deleteUser,
   updateUser,
   getAllBookings,
+  getSingleBookings,
   getAllMenus,
   getAllSalaries,
   getAllGroceries,
   deleteBooking,
   updateBooking,
+  getSingleGrocery,
   deleteGrocery,
   updateGrocery,
+  getSingleMenu,
   deleteMenu,
   updateMenu,
+  getSingleSalaries,
   deleteSalary,
   updateSalary,
 };
