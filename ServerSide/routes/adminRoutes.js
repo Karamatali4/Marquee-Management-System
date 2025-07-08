@@ -21,6 +21,7 @@ const {
   updateSalary,
   deleteUser,
   updateUser,
+  getSingleUsers,
 } = require("../controllers/adminController");
 
 const adminRoutes = express.Router();
@@ -30,8 +31,12 @@ adminRoutes.use(authMiddleware);
 adminRoutes.use(adminMiddleware);
 
 //  *****************   Users section ******************
+
+// get All users
 adminRoutes.get("/users", adminMiddleware, getAllUsers);
 
+// get single  users
+adminRoutes.get("/users/:id", adminMiddleware, getSingleUsers);
 // Admin-only: delete a booking
 adminRoutes.delete(
   "/users/:id",

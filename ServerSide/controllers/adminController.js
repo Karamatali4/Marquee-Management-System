@@ -17,6 +17,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+
+const getSingleUsers = async(req,res) => {
+  try {
+    
+    const user = await User.findById(req.params.id);
+    if(!user){
+      return res.status(404).json({error:"user not found"});
+    }
+    res.status(200).json({msg: ` ${user}`});
+  } catch (error) {
+    res.status(500).json({ msg: error });
+    
+  }
+} 
 // DELETE user (Admin Only)
 const deleteUser = async (req, res) => {
   try {
@@ -40,15 +54,15 @@ const updateUser = async (req, res) => {
     });
 
     if (!updateduser) {
-      return res.status(404).json({ error: "Booking not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.status(200).json({
-      msg: "Booking updated successfully",
-      booking: updatedBooking,
+      msg: "user updated successfully",
+      booking: updateduser,
     });
   } catch (error) {
-    console.error("Error updating booking:", error);
+    console.error("Error updating user:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -254,7 +268,7 @@ const updateSalary = async (req, res) => {
 };
 
 module.exports = {
-  getAllUsers,
+  getAllUsers,getSingleUsers,
   deleteUser,
   updateUser,
   getAllBookings,
