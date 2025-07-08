@@ -22,6 +22,10 @@ const {
   deleteUser,
   updateUser,
   getSingleUsers,
+  getSingleBookings,
+  getSingleMenu,
+  getSingleSalaries,
+  getSingleGrocery,
 } = require("../controllers/adminController");
 
 const adminRoutes = express.Router();
@@ -60,6 +64,10 @@ adminRoutes.put(
 // get all booking data
 adminRoutes.get("/bookings", adminMiddleware, getAllBookings);
 
+
+// get single booking data
+adminRoutes.get("/bookings/:id", adminMiddleware, getSingleBookings);
+
 // Admin-only: delete a booking
 adminRoutes.delete(
   "/bookings/:id",
@@ -80,6 +88,16 @@ adminRoutes.put(
 
 // get all grocerie data
 adminRoutes.get("/groceries", adminMiddleware, getAllGroceries);
+
+
+//  get single grocerie
+adminRoutes.get(
+  "/groceries/:id",
+  authMiddleware,
+  adminMiddleware,
+  getSingleGrocery
+);
+
 
 //  delete a grocerie
 adminRoutes.delete(
@@ -102,6 +120,11 @@ adminRoutes.put(
 // get all Menu data
 adminRoutes.get("/menu", adminMiddleware, getAllMenus);
 
+
+//  get single a menu
+adminRoutes.get("/menu/:id", authMiddleware, adminMiddleware, getSingleMenu);
+
+
 //  delete a menu
 adminRoutes.delete("/menu/:id", authMiddleware, adminMiddleware, deleteMenu);
 
@@ -113,7 +136,8 @@ adminRoutes.put("/menu/:id", authMiddleware, adminMiddleware, updateMenu);
 // get all Salary data
 adminRoutes.get("/salaries", adminMiddleware, getAllSalaries);
 
-adminRoutes.get("/salaries", adminMiddleware, getAllSalaries);
+// get single Salary data
+adminRoutes.get("/salaries/:id", adminMiddleware, getSingleSalaries);
 
 //  delete a Salary
 adminRoutes.delete(
