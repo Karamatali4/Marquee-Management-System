@@ -61,6 +61,7 @@ const updateUser = async (req, res) => {
       msg: "user updated successfully",
       booking: updateduser,
     });
+    console.log("user updated successfully")
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ error: "Server error" });
