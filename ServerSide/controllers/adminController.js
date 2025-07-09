@@ -301,7 +301,7 @@ const getSingleSalaries = async (req, res) => {
     if (!salary) {
       return res.status(404).json({ error: "salary not found" });
     }
-    res.status(200).json({ msg: "get Single salary  successfully" });
+    res.status(200).json({ msg: "get Single salary  successfully",salary });
     console.error("get single  salary:" , salary);
 
   } catch (error) {
@@ -341,6 +341,8 @@ const updateSalary = async (req, res) => {
       msg: "salary updated successfully",
       salary: updatedsalary,
     });
+    console.error("salary updated successfully", updatedsalary);
+
   } catch (error) {
     console.error("Error updating salary:", error);
     res.status(500).json({ error: "Server error" });
