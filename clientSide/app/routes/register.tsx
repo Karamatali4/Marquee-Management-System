@@ -3,6 +3,8 @@ import { json, redirect } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import axios from "axios";
+import Footer from "~/components/footer";
+import Header from "~/components/header";
 import RegisterForm from "~/components/RegisterForm";
 
 interface ActionData {
@@ -54,5 +56,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Register() {
   const actionData = useActionData<ActionData>();
-  return <RegisterForm error={actionData?.error} />;
+
+  return(<>
+  
+  <RegisterForm error={actionData?.error} />
+  
+  </>); 
 }
