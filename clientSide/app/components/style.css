@@ -1,0 +1,23 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures full viewport height */
+}
+
+.container {
+  flex: 1; /* Pushes footer down when content is short */
+}
+
+.footer {
+  background: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
