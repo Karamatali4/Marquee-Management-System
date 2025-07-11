@@ -11,7 +11,9 @@ export default function LoginForm({ error }: ActionData) {
     
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white shadow-lg rounded-2xl overflow-hidden">
-        
+        <Link to={"/"}> 👈</Link>
+
+
         {/* Left Section */}
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold"><img src="/logo.png" alt="marquee managment system" /></h1>
