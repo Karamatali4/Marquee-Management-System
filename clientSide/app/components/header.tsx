@@ -10,11 +10,11 @@ export default function Header() {
           Summer Sale For All Swim Suits and Free Express Delivery - OFF 50%!
         </p>
 
-        <nav className="flex w-[100%]  text-amber-950 lg:h-16 lg:justify-around lg:items-center lg:gap-5 bg-amber-50 border-b-8">
+        <nav className="flex w-[100%]  text-amber-950 lg:h-16 justify-around gap-2 lg:justify-around lg:items-center lg:gap-5 bg-amber-50 border-b-8">
           <h1 className=" font-extrabold text-lg"> <Link to={"/"}> <img src="/mainlogo.png" className="w-10" alt="" /></Link></h1>
 
           {/* navlink */}
-          <ul className="flex justify-around items-center lg:gap-5">
+          <ul className="flex justify-around items-center gap-4 lg:gap-5">
             
             <li className="hover:text-amber-950">
               <NavLink
