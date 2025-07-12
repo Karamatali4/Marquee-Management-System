@@ -1,18 +1,20 @@
 // 📁 frontend/app/components/RegisterForm.tsx
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useNavigate } from "@remix-run/react";
 
 interface ActionData {
   error?: string;
 }
 
 export default function RegisterForm({ error }: ActionData) {
+  const navigate = useNavigate();
   return (
     <>
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
       <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white shadow-lg rounded-2xl overflow-hidden">
         {/* Left Section - Images */}
-        <Link to={"/"}> 👈</Link>
+        
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
+        <button onClick={() => navigate(-1)} className="text-3xl self-start "> 👈 <span className="text-sm font-bold text-amber-950">Back</span></button>
           <h1 className="text-3xl font-bold mb-6"> <img src="/logo.png" alt="marquee managment system" /> </h1>
           <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
             <img
