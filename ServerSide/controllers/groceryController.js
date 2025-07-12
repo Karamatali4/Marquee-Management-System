@@ -22,6 +22,7 @@ const createGroceryData = async (req, res) => {
     console.log("Groceries data Successfully add : ", newGrocery);
   } catch (error) {
     console.log(error);
+    res.status(201).json({ msg: error });
   }
 };
 
