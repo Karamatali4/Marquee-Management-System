@@ -1,4 +1,5 @@
 const Booking = require("../models/Booking");
+const Contact = require("../models/Contact");
 const Grocery = require("../models/Grocery");
 const Menu = require("../models/Menu");
 const Salary = require("../models/Salary");
@@ -349,6 +350,83 @@ const updateSalary = async (req, res) => {
   }
 };
 
+
+
+//  *****************   Contact section ******************
+
+
+
+// get all contact data
+const getAllContact = async (req, res) => {
+  try {
+    const contact = await Contact.find();
+    res.status(200).json({ msg: `contact: ${contact}` });
+    console.log("All contact: ", contact);
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
+
+
+
+
+// get single contact (Admin Only)
+const getSingleContact = async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ error: "contact not found" });
+    }
+    res.status(200).json({ msg: "get Single contact  successfully",contact });
+    console.error("get single  contact:" , contact);
+
+  } catch (error) {
+    console.error("Error get single contact:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// DELETE contact (Admin Only)
+const deleteContact = async (req, res) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ error: "contact not found" });
+    }
+    res.status(200).json({ msg: "contact deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// UPDATE contact (Admin Only)
+const updateContact = async (req, res) => {
+  try {
+    const updatedcontact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedcontact) {
+      return res.status(404).json({ error: "contact not found" });
+    }
+
+    res.status(200).json({
+      msg: "contact updated successfully",
+      contact: updatedcontact,
+    });
+    console.error("contact updated successfully", updatedcontact);
+
+  } catch (error) {
+    console.error("Error updating contact:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+
 module.exports = {
   getAllUsers,getSingleUsers,
   deleteUser,
@@ -369,4 +447,8 @@ module.exports = {
   getSingleSalaries,
   deleteSalary,
   updateSalary,
+  getAllContact,
+  getSingleContact,
+  updateContact,
+  deleteContact
 };
