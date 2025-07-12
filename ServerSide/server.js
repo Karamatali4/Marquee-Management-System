@@ -30,6 +30,7 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/salary", salaryRoutes);
 app.use("/api/grocery", groceryRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/contact", contactRoutes);
 // only for admin
 app.use("/api/auth", adminRoutes);
 
