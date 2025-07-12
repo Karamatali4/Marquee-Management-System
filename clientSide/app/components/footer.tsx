@@ -25,7 +25,7 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-2">Account</h3>
           <p>My Account</p>
-          <p><Link to={"/login"} className="hover:text-amber-950"> Login </Link> / <Link to={"register"} className="hover:text-amber-950"> Register</Link></p>
+          <p><Link to={"/login"} className="hover:text-amber-950"> Login </Link> / <Link to={"/register"} className="hover:text-amber-950"> Register</Link></p>
           
           <p>Wishlist</p>
           
