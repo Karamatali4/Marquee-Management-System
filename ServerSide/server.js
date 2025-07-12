@@ -7,6 +7,7 @@ const groceryRoutes = require("./routes/groceryRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const salaryRoutes = require("./routes/salaryRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 require("dotenv").config();
 
 const app = express();
