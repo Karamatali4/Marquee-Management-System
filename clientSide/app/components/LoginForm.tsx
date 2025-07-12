@@ -1,21 +1,24 @@
 // 📁 frontend/app/components/LoginForm.tsx
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useNavigate } from "@remix-run/react";
 
 interface ActionData {
   error?: string;
 }
 
 export default function LoginForm({ error }: ActionData) {
+  const navigate = useNavigate();
+
   return (
     <>
     
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white shadow-lg rounded-2xl overflow-hidden">
-        <Link to={"/"}> 👈</Link>
+        
 
 
         {/* Left Section */}
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
+        <button onClick={() => navigate(-1)} className="text-3xl self-start "> 👈 <span className="text-sm font-bold text-amber-950">Back</span></button>
           <h1 className="text-3xl font-bold"><img src="/logo.png" alt="marquee managment system" /></h1>
           <div className="grid grid-cols-2 gap-4">
             <img src="/l1.png" className="rounded-xl w-40 h-40 object-cover" />
