@@ -4,5 +4,5 @@ const { createContact } = require("../controllers/contatcController");
 const contactRoutes = express.Router();
 
 
-contactRoutes.post("/",authMiddleware,staffMiddleware,adminMiddleware,createContact);
+contactRoutes.post("/",createContact);
 module.exports = contactRoutes;
