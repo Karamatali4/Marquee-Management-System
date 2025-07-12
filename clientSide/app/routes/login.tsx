@@ -3,8 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import axios from "axios";
-import Footer from "~/components/footer";
-import Header from "~/components/header";
+
 import LoginForm from "~/components/LoginForm";
 
 interface ActionData {
