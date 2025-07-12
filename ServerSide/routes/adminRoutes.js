@@ -26,6 +26,10 @@ const {
   getSingleMenu,
   getSingleSalaries,
   getSingleGrocery,
+  getAllContact,
+  getSingleContact,
+  deleteContact,
+  updateContact,
 } = require("../controllers/adminController");
 
 const adminRoutes = express.Router();
@@ -147,7 +151,33 @@ adminRoutes.delete(
   deleteSalary
 );
 
+
 // Optionally allow update Salary single data
 adminRoutes.put("/salaries/:id", authMiddleware, adminMiddleware, updateSalary);
+
+
+
+
+//  *****************   Contact section ******************
+
+// get all Contact data
+adminRoutes.get("/contact", adminMiddleware, getAllContact);
+
+// get single Contact data
+adminRoutes.get("/contact/:id", adminMiddleware, getSingleContact);
+
+//  delete a Contact
+adminRoutes.delete(
+  "/contact/:id",
+  authMiddleware,
+  adminMiddleware,
+  deleteContact
+);
+
+
+// Optionally allow update Contact single data
+adminRoutes.put("/Contact/:id", authMiddleware, adminMiddleware, updateContact);
+
+
 
 module.exports = adminRoutes;
