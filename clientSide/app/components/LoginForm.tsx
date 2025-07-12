@@ -19,7 +19,7 @@ export default function LoginForm({ error }: ActionData) {
         {/* Left Section */}
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
         <button onClick={() => navigate(-1)} className="text-3xl self-start "> 👈 <span className="text-sm font-bold text-amber-950">Back</span></button>
-          <h1 className="text-3xl font-bold"><img src="/logo.png" alt="marquee managment system" /></h1>
+          <img src="/logo.png" className="my-5" alt="marquee managment system" />
           <div className="grid grid-cols-2 gap-4">
             <img src="/l1.png" className="rounded-xl w-40 h-40 object-cover" />
             <img src="/l2.png"className="rounded-xl w-full h-28 object-cover" />
@@ -40,7 +40,7 @@ export default function LoginForm({ error }: ActionData) {
         <h1 className="text-2xl font-bold mb-4">Login</h1>
         <input name="username" placeholder="Username" className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         <input name="password" type="password" placeholder="Password" className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <button type="submit" className="bg-amber-700 text-amber-50 px-4 py-2 w-72 lg:w-full rounded-sm">Login</button>
+        <button type="submit" className="bg-amber-700 text-amber-50 px-4 py-2 w-full lg:w-full rounded-sm">Login</button>
         {error && <p className="text-red-500 mt-2">{error}</p>}
         <p className="text-amber-600">Don't have an account yet? <Link to={"/register"} className="text-amber-950 font-bold"> Register here. </Link></p>
       </Form>
