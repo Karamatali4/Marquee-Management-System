@@ -8,7 +8,7 @@ const About = () => {
   return (
     <>
     <Header/>
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50  ">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-amber-50  ">
       <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left: Text Section */}
         <div className=' flex md:flex-col md:justify-center md:items-center lg:justify-start lg:items-start'>
