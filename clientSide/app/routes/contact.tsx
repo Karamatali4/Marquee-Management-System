@@ -44,7 +44,7 @@ export default function ContactPage() {
 
   useEffect(() => {
     if (actionData?.success) {
-      toast.success("🦄 Message sent successfully!", {
+      toast.success(" Message sent successfully!", {
         autoClose: 3000,
         theme: "light",
       });

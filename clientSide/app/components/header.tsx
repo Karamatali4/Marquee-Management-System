@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <header className="header  lg:h-15 lg:bg-amber-700 text-amber-50 flex flex-col lg:justify-center lg:items-center w-[100%]">
         <p className="hidden lg:flex">
-          Summer Sale For All Swim Suits and Free Express Delivery - OFF 50%!
+          Summer Sale For All Marquee Rooms and Free Room services - OFF 50%!
         </p>
 
         <nav className="flex w-[100%]  text-amber-950 lg:h-16 justify-around gap-2 lg:justify-around lg:items-center lg:gap-5 bg-amber-50 border-b-8">
