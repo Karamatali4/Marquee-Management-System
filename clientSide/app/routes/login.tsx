@@ -1,13 +1,14 @@
-// 📁 frontend/app/routes/login.tsx
 import { json, redirect } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useLoaderData, useNavigate } from "@remix-run/react";
 import axios from "axios";
-
 import LoginForm from "~/components/LoginForm";
+import { useEffect } from "react";
 
 interface ActionData {
   error?: string;
+  token?: string;
+  role?: string;
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -23,12 +24,12 @@ export const action: ActionFunction = async ({ request }) => {
       password,
     });
 
-    const token = response.data.token;
+    const { token, role, userName } = response.data;
 
-    return redirect("/dashboard", {
-      headers: {
-        "Set-Cookie": `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-      },
+    // ✅ Cookie optional (sirf backend ke liye)
+    return json<ActionData>({
+      token,
+      role,
     });
   } catch (error: any) {
     const message =
@@ -37,15 +38,21 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
+
 export default function Login() {
   const actionData = useActionData<ActionData>();
-  return (
-<>
+  const navigate = useNavigate();
 
-<LoginForm error={actionData?.error} />
+  useEffect(() => {
+    if (actionData?.token && actionData?.role) {
+      // ✅ Save token & role in localStorage
+      localStorage.setItem("token", actionData.token);
+      localStorage.setItem("role", actionData.role);
 
-</>
-  );
-  
-  
+      // ✅ Redirect to dashboard
+      navigate("/dashboard");
+    }
+  }, [actionData, navigate]);
+
+  return <LoginForm error={actionData?.error} />;
 }

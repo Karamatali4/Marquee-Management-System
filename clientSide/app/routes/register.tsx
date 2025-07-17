@@ -1,10 +1,7 @@
-// 📁 frontend/app/routes/register.tsx
 import { json, redirect } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import axios from "axios";
-import Footer from "~/components/footer";
-import Header from "~/components/header";
 import RegisterForm from "~/components/RegisterForm";
 
 interface ActionData {
@@ -22,6 +19,11 @@ export const action: ActionFunction = async ({ request }) => {
   const password = form.get("password") as string;
   const role = form.get("role") as string;
 
+  // Password validation
+  if (password.length < 8) {
+    return json<ActionData>({ error: "Password must be at least 8 characters" });
+  }
+
   const apiUrl = process.env.API_URL || "http://localhost:5000";
 
   try {
@@ -37,14 +39,9 @@ export const action: ActionFunction = async ({ request }) => {
 
     const token = response.data.token;
 
-    const isProduction = process.env.NODE_ENV === "production";
-    const cookie = `token=${token}; Path=/; HttpOnly; ${
-      isProduction ? "Secure; SameSite=Strict" : ""
-    }`;
-
     return redirect("/login", {
       headers: {
-        "Set-Cookie": cookie,
+        "Set-Cookie": `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict`,
       },
     });
   } catch (error: any) {
@@ -56,10 +53,5 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Register() {
   const actionData = useActionData<ActionData>();
-
-  return(<>
-  
-  <RegisterForm error={actionData?.error} />
-  
-  </>); 
+  return <RegisterForm error={actionData?.error} />;
 }

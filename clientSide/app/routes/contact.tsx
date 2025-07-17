@@ -60,7 +60,7 @@ export default function ContactPage() {
   }, [actionData]);
 
   return (
-    <div className="min-h-screen bg-amber-50 text-amber-950 flex flex-col justify-between">
+    <div className="min-h-full bg-amber-50 text-amber-950 flex flex-col justify-between ">
       <ToastContainer />
       <Header />
 

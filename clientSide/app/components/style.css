@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .layout {
@@ -20,4 +21,8 @@ html, body {
   color: white;
   padding: 10px;
   text-align: center;
+}
+header{
+  position: absolute !important;
+  top:0 !important;
 }

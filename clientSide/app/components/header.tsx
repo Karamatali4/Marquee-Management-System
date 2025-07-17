@@ -2,6 +2,7 @@ import React from "react";
 import "../components/style.css";
 import { Link, NavLink } from "@remix-run/react";
 import { Search, ShoppingCart } from "lucide-react";
+import "./style.css"
 export default function Header() {
   return (
     <>

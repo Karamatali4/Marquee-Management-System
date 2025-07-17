@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <>
     <Header/>
-    <main className="flex items-center justify-center pt-10 pb-24 ">
+    <main className="flex items-center justify-center pt-10 pb-24 min-h-full 2xl:min-h-screen">
       <div className="text-center">
         <h1 className="text-3xl font-bold mb-4"><img src="/logo.png" alt="" /></h1>
         
