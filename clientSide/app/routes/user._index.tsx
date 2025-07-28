@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function userIndex() {
-  return (
-    <div>user._index</div>
-  )
+    
+  return (<>
+    <div className="text-amber-950">user._index</div>
+    </>
+  );
 }
 

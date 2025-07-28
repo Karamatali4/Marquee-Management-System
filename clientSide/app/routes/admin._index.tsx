@@ -11,6 +11,6 @@ export default function AdminDashboard() {
   }, []);
 
   return (<>
-  <h1>Welcome to Admin Dashboard</h1>;
+  <h1 className="text-amber-950">Welcome to Admin Dashboard</h1>;
   </>);
 }

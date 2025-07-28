@@ -8,7 +8,7 @@ if(role !== "staff"){
 }
     },[]);
   return (<>
-    <div>staff._index</div>
+    <div className="text-amber-950">staff index page</div>
   </>
   );
 }

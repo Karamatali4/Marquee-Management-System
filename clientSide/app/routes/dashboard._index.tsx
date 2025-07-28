@@ -1,21 +1,31 @@
 // routes/dashboard._index.tsx
+import { useNavigate } from "@remix-run/react";
 import { useEffect } from "react";
 
 export default function DashboardIndex() {
+    const navigate = useNavigate();
+
   useEffect(() => {
     const role = localStorage.getItem("role");
 
     if (!role) {
-      window.location.href = "/login";
+        navigate("/login")
+    //   window.location.href = "/login";
       return;
     }
 
     if (role === "admin") {
-      window.location.href = "/admin";
+    //   window.location.href = "/admin";
+        navigate("/admin")
+
     } else if (role === "staff") {
-      window.location.href = "/staff";
+    //   window.location.href = "/staff";
+        navigate("/staff")
+
     } else {
-      window.location.href = "/user";
+    //   window.location.href = "/user";
+        navigate("/user")
+
     }
   }, []);
 
