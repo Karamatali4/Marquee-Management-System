@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
+import { useEffect } from "react";
+import { useNavigate } from "@remix-run/react";
 
-export default function staffIndex() {
-    useEffect(() =>{
-const role = localStorage.getItem("role");
-if(role !== "staff"){
-    window.location.href = "/login"
-}
-    },[]);
-  return (<>
-    <div className="text-amber-950">staff index page</div>
-  </>
+export default function StaffDashboard() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "staff" && role !== "admin") {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  return (
+    <div className="text-amber-950 ">Welcome to Staff Dashboard</div>
   );
 }
-

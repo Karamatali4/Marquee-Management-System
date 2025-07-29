@@ -18,7 +18,7 @@ export default function LoginForm({ error }: ActionData) {
 
         {/* Left Section */}
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
-        <button onClick={() => navigate(-1)} className="text-3xl self-start "> 👈 <span className="text-sm font-bold text-amber-950">Back</span></button>
+        <button onClick={() => navigate(-1)} className="self-start">  <img src="/arrow.png" className="w-12" alt="" /></button>
           <img src="/logo.png" className="my-5" alt="marquee managment system" />
           <div className="grid grid-cols-2 gap-4">
             <img src="/l1.png" className="rounded-xl w-40 h-40 object-cover" />

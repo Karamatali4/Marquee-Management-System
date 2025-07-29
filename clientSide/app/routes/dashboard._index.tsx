@@ -10,20 +10,16 @@ export default function DashboardIndex() {
 
     if (!role) {
         navigate("/login")
-    //   window.location.href = "/login";
       return;
     }
 
     if (role === "admin") {
-    //   window.location.href = "/admin";
         navigate("/admin")
 
     } else if (role === "staff") {
-    //   window.location.href = "/staff";
         navigate("/staff")
 
     } else {
-    //   window.location.href = "/user";
         navigate("/user")
 
     }
