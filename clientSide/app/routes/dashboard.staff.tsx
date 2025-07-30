@@ -12,8 +12,8 @@ export default function StaffDashboard() {
 
   return (
     <Layout role="staff">
-      <h1 className="text-2xl font-bold">Staff Dashboard</h1>
-      <p>Staff-specific dashboard view</p>
+      <h1 className="text-2xl text-amber-950 font-bold">Staff Dashboard</h1>
+      <p>Staff-specific dashboard view text-amber-950</p>
     </Layout>
   );
 }

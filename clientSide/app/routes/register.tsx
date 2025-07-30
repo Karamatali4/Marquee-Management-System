@@ -1,11 +1,14 @@
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useNavigate } from "@remix-run/react";
 import axios from "axios";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import RegisterForm from "~/components/RegisterForm";
 
 interface ActionData {
   error?: string;
+  success?: boolean;
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -39,11 +42,8 @@ export const action: ActionFunction = async ({ request }) => {
 
     const token = response.data.token;
 
-    return redirect("/login", {
-      headers: {
-        "Set-Cookie": `token=${token}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-      },
-    });
+    // Save token if needed later (e.g., in cookie or localStorage via client)
+    return json<ActionData>({ success: true });
   } catch (error: any) {
     const message =
       error.response?.data?.error || "Registration failed. Please try again.";
@@ -53,5 +53,20 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Register() {
   const actionData = useActionData<ActionData>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!actionData) return;
+
+    if (actionData.success) {
+      toast.success("Successfully Registered!", {
+        autoClose: 1000,
+        onClose: () => navigate("/login"),
+      });
+    } else if (actionData.error) {
+      toast.error(actionData.error);
+    }
+  }, [actionData, navigate]);
+
   return <RegisterForm error={actionData?.error} />;
 }

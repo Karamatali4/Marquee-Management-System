@@ -4,6 +4,7 @@ import { useActionData, useNavigate } from "@remix-run/react";
 import axios from "axios";
 import LoginForm from "~/components/LoginForm";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface ActionData {
   error?: string;
@@ -37,12 +38,20 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (actionData?.token && actionData?.role) {
+    if (!actionData) return;
+
+    if (actionData.token && actionData.role) {
+      // Save in localStorage
       localStorage.setItem("token", actionData.token);
       localStorage.setItem("role", actionData.role);
 
-      // 🧭 Redirect user to role-based dashboard
-      navigate(`/dashboard/${actionData.role}`);
+      // Show success toast and redirect
+      toast.success("Login successful!", {
+        autoClose: 1000,
+        onClose: () => navigate(`/dashboard/${actionData.role}`),
+      });
+    } else if (actionData.error) {
+      toast.error(actionData.error);
     }
   }, [actionData, navigate]);
 

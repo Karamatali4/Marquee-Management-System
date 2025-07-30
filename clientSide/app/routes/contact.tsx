@@ -3,7 +3,7 @@ import { Form, useActionData } from "@remix-run/react";
 import { Mail, Phone } from "lucide-react";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import { useEffect, useRef } from "react";
 import { json, type ActionFunction } from "@remix-run/node";
 import axios from "axios";
@@ -61,7 +61,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-full bg-amber-50 text-amber-950 flex flex-col justify-between ">
-      <ToastContainer />
+      
       <Header />
 
       <div className="text-sm text-gray-500 px-6 py-4">Home / Contact</div>
