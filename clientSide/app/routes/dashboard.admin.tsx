@@ -1,3 +1,4 @@
+import Layout from "~/components/Layout";
 import { useEffect } from "react";
 import { useNavigate } from "@remix-run/react";
 
@@ -6,12 +7,13 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-    if (role !== "admin") {
-      navigate("/login");
-    }
+    if (role !== "admin") navigate("/login");
   }, [navigate]);
 
   return (
-    <h1 className="text-amber-950">Welcome to Admin Dashboard</h1>
+    <Layout role="admin">
+      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+      <p>Admin-only view. View bookings, menu, salary, etc.</p>
+    </Layout>
   );
 }

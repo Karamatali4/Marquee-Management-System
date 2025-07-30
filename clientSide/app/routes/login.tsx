@@ -1,4 +1,3 @@
-// routes/login.tsx
 import { json } from "@remix-run/node";
 import type { ActionFunction } from "@remix-run/node";
 import { useActionData, useNavigate } from "@remix-run/react";
@@ -24,6 +23,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
 
     const { token, role } = response.data;
+
     return json<ActionData>({ token, role });
   } catch (error: any) {
     const message =
@@ -41,14 +41,8 @@ export default function Login() {
       localStorage.setItem("token", actionData.token);
       localStorage.setItem("role", actionData.role);
 
-      // Redirect by role
-      if (actionData.role === "admin") {
-        navigate("/admin");
-      } else if (actionData.role === "staff") {
-        navigate("/staff");
-      } else {
-        navigate("/user");
-      }
+      // 🧭 Redirect user to role-based dashboard
+      navigate(`/dashboard/${actionData.role}`);
     }
   }, [actionData, navigate]);
 
