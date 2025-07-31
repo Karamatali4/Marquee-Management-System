@@ -12,8 +12,8 @@ export default function AdminDashboard() {
 
   return (
     <Layout role="admin">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-      <p>Admin-only view. View bookings, menu, salary, etc.</p>
+      <h1 className="text-2xl font-bold text-amber-950">Admin Dashboard</h1>
+      <p className="text-amber-950">Admin-only view. View bookings, menu, salary, etc.</p>
     </Layout>
   );
 }
