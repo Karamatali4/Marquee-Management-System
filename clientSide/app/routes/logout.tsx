@@ -11,6 +11,7 @@ export default function Logout() {
     hasLoggedOut.current = true;
 
     // Clear storage
+    localStorage.clear();
     localStorage.removeItem("token");
     localStorage.removeItem("role");
 

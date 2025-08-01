@@ -1,9 +1,25 @@
 // 📁 frontend/app/routes/_index.jsx
-import { Link } from "@remix-run/react";
+import { Link, useNavigate } from "@remix-run/react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import Footer from "~/components/footer";
 import Header from "~/components/header";
 
 export default function Index() {
+  const navigate = useNavigate();
+
+  // ✅ Redirect if already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    const expiresAt = Number(localStorage.getItem("expiresAt"));
+
+    if (token && role && Date.now() < expiresAt) {
+      toast.info("You're already logged in");
+      navigate(`/dashboard/${role}`);
+    }
+  }, [navigate]);
+
   return (
     <>
     <Header/>

@@ -10,7 +10,7 @@ export default function DashboardIndex() {
     if (!role) {
       navigate("/login");
     } else {
-      navigate(`/dashboard.${role}`);
+      navigate(`/dashboard/${role}`);
     }
   }, [navigate]);
 

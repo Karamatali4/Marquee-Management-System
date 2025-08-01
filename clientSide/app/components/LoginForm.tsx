@@ -18,7 +18,21 @@ export default function LoginForm({ error }: ActionData) {
 
         {/* Left Section */}
         <div className="w-full lg:w-1/2 bg-amber-50 text-amber-50 p-8 flex flex-col items-center justify-center">
-        <button onClick={() => navigate(-1)} className="self-start">  <img src="/arrow.png" className="w-12" alt="" /></button>
+        <button
+  onClick={() => {
+    const justLoggedOut = localStorage.getItem("justLoggedOut");
+
+    if (justLoggedOut === "true") {
+      localStorage.removeItem("justLoggedOut");
+      navigate("/");
+    } else {
+      navigate(-1);
+    }
+  }}
+  className="self-start"
+>
+  <img src="/arrow.png" className="w-12" alt="Back arrow" />
+</button>
           <img src="/logo.png" className="my-5" alt="marquee managment system" />
           <div className="grid grid-cols-2 gap-4">
             <img src="/l1.png" className="rounded-xl w-40 h-40 object-cover" />

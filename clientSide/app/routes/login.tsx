@@ -5,7 +5,7 @@ import axios from "axios";
 import LoginForm from "~/components/LoginForm";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import {jwtDecode} from "jwt-decode"; // ✅ NEW
+import { jwtDecode } from "jwt-decode";
 
 interface ActionData {
   error?: string;
@@ -13,7 +13,7 @@ interface ActionData {
   role?: string;
 }
 
-// 💡 This is unchanged
+// 🚀 Server-side login logic (unchanged)
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const username = form.get("username") as string;
@@ -39,15 +39,26 @@ export default function Login() {
   const actionData = useActionData<ActionData>();
   const navigate = useNavigate();
 
+  // ✅ NEW: Redirect if already logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    const expiresAt = Number(localStorage.getItem("expiresAt"));
+
+    if (token && role && Date.now() < expiresAt) {
+      toast.info("You're already logged in");
+      navigate(`/dashboard/${role}`);
+    }
+  }, [navigate]);
+
+  // ✅ Handle login result and store session
   useEffect(() => {
     if (!actionData) return;
 
     if (actionData.token && actionData.role) {
-      // ✅ Decode token to get expiry
       const decoded: { exp: number } = jwtDecode(actionData.token);
-      const expiry = decoded.exp * 1000; // convert to ms
+      const expiry = decoded.exp * 1000;
 
-      // ✅ Store token, role, and expiry in localStorage
       localStorage.setItem("token", actionData.token);
       localStorage.setItem("role", actionData.role);
       localStorage.setItem("expiresAt", expiry.toString());
