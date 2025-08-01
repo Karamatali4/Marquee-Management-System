@@ -5,6 +5,7 @@ import axios from "axios";
 import LoginForm from "~/components/LoginForm";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import {jwtDecode} from "jwt-decode"; // ✅ NEW
 
 interface ActionData {
   error?: string;
@@ -12,6 +13,7 @@ interface ActionData {
   role?: string;
 }
 
+// 💡 This is unchanged
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const username = form.get("username") as string;
@@ -41,11 +43,15 @@ export default function Login() {
     if (!actionData) return;
 
     if (actionData.token && actionData.role) {
-      // Save in localStorage
+      // ✅ Decode token to get expiry
+      const decoded: { exp: number } = jwtDecode(actionData.token);
+      const expiry = decoded.exp * 1000; // convert to ms
+
+      // ✅ Store token, role, and expiry in localStorage
       localStorage.setItem("token", actionData.token);
       localStorage.setItem("role", actionData.role);
+      localStorage.setItem("expiresAt", expiry.toString());
 
-      // Show success toast and redirect
       toast.success("Login successful!", {
         autoClose: 1000,
         onClose: () => navigate(`/dashboard/${actionData.role}`),
