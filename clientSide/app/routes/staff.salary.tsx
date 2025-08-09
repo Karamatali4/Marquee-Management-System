@@ -4,6 +4,7 @@ import { useActionData, Form } from "@remix-run/react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import axios from "axios";
+import Layout from "~/components/Layout";
 
 interface ActionResponse {
   success?: boolean;
@@ -49,9 +50,23 @@ export default function SalaryForm() {
     if (actionData?.error) toast.error(actionData.error);
   }, [actionData]);
 
+
+  const containerStyle = {
+    
+    background: 'linear-gradient(to right, #FFC123, #FFF4D6)',
+  };
+
   return (
+
+    <>
+    <Layout role="staff">
+    <section className='h-[35rem] w-[20rem]  m-auto flex flex-col justify-center items-center rounded-md' style={containerStyle}>
+   <nav className="">
+    <img src="" alt="" />
+
+   </nav>
     <Form method="post" className="space-y-4 p-4">
-      <input name="employeeName" placeholder="Employee Name" required />
+      <input name="employeeName" placeholder="Employee Name" className="outline-none bg-transparent text-amber-950 placeholder:text-amber-100" required />
       <input name="designation" placeholder="Designation" required />
       <input
         type="number"
@@ -67,5 +82,9 @@ export default function SalaryForm() {
 
       <button type="submit">Submit Salary</button>
     </Form>
+    </section>
+    </Layout>
+    </>
+    
   );
 }
