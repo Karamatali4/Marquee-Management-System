@@ -65,9 +65,9 @@ export default function Sidebar({ role }: { role: string }) {
 
           {role === "staff" && (
             <>
-              <li><Link to="/staff/bookings" className="hover:text-amber-200">Bookings</Link></li>
-              <li><Link to="/staff/menu" className="hover:text-amber-200">Menu</Link></li>
-              <li><Link to="/staff/grocery" className="hover:text-amber-200">Grocery</Link></li>
+              <li><Link to="/dashboard/staff/bookings" className="hover:text-amber-200">Bookings</Link></li>
+              <li><Link to="/dashboard/staff/menu" className="hover:text-amber-200">Menu</Link></li>
+              <li><Link to="/dashboard/staff/grocery" className="hover:text-amber-200">Grocery</Link></li>
               <li><Link to="/staff/salary" className="hover:text-amber-200">Salary</Link></li>
             </>
           )}

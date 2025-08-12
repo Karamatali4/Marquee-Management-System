@@ -6,11 +6,12 @@ export default function DashboardIndex() {
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-
+    const url = `/dashhboard/${role}` && `/${role}`
+    
     if (!role) {
       navigate("/login");
     } else {
-      navigate(`/dashboard/${role}`);
+      navigate(url);
     }
   }, [navigate]);
 
