@@ -40,7 +40,7 @@ export const action: ActionFunction = async ({ request }) => {
 export default function SalaryForm() {
   const actionData = useActionData<ActionResponse>();
     const formRef = useRef<HTMLFormElement>(null);
-  
+  const isAuthorized = useAuthGuard("staff");
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -62,7 +62,12 @@ toast.success("Salary submitted!");
     // background: 'linear-gradient( #FFC123, #FFF4D6)',
   };
 
-  useAuthGuard("staff");
+  
+
+  if (!isAuthorized) {
+    return <p>Checking access...</p>; // Or a spinner
+  }
+
 
   return (
 
