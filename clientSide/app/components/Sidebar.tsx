@@ -5,6 +5,7 @@ import { BiFoodMenu, BiLogOutCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { CiHome } from "react-icons/ci";
 import { TbBrandBooking } from "react-icons/tb";
+import StaffSidebar from "../components/dashboard/staffSidebar";
 
 export default function Sidebar({ role }: { role: string }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -53,7 +54,7 @@ export default function Sidebar({ role }: { role: string }) {
       >
         <h2 className="text-xl font-bold mb-4 capitalize mt-10 ">{role.toUpperCase()} MENU</h2>
         <ul className="space-y-3 text-amber-950">
-          <li className="flex justify-center items-center gap-3"> <span><CiHome className="text-amber-900 text-xl" />
+          <li className="flex justify-center items-center gap-3 hover:text-amber-200"> <span className="pe-4"><CiHome className=" text-amber-900 text-xl hover:text-amber-200" />
 </span>
             <Link to={`/dashboard/${role}`} className="hover:text-amber-200 text-lg">Home</Link>
           </li>
@@ -70,13 +71,14 @@ export default function Sidebar({ role }: { role: string }) {
 
           {role === "staff" && (
             <>
-              <li className="flex justify-center items-center gap-1"> <span><TbBrandBooking className="text-amber-900 text-xl"/>
+            <StaffSidebar/>
+              {/* <li className="flex justify-center items-center gap-1"> <span><TbBrandBooking className="text-amber-900 text-xl"/>
 </span><Link to="/staff/bookings" className="hover:text-amber-200 text-lg">Bookings</Link></li>
               <li className="flex justify-center items-center gap-3"> <span><BiFoodMenu className="text-amber-900 text-xl" />
 </span><Link to="/staff/menu" className="hover:text-amber-200 text-lg">Menu</Link></li>
 
               <li className="flex justify-center items-center gap-3"><Link to="/staff/grocery" className="hover:text-amber-200 text-lg">Grocery</Link></li>
-              <li className="flex justify-center items-center gap-3"><Link to="/staff/salary" className="hover:text-amber-200 text-xl">Salary</Link></li>
+              <li className="flex justify-center items-center gap-3"><Link to="/staff/salary" className="hover:text-amber-200 text-xl">Salary</Link></li> */}
             </>
           )}
 
@@ -87,8 +89,8 @@ export default function Sidebar({ role }: { role: string }) {
             </>
           )}
 
-          <li className="flex justify-center items-center gap-3"><CgProfile className="text-amber-900 text-xl"/><Link to="/profile" className="hover:text-amber-200 text-lg">Profile</Link></li>
-          <li className="flex justify-center items-center gap-3"> <span><BiLogOutCircle className="text-amber-900 text-xl" /></span> <Link to="/logout" className="hover:text-amber-200 text-lg ">Logout</Link></li>
+          <li className="flex justify-center items-center gap-3 hover:text-amber-200"><span className="pe-4"><CgProfile className="text-amber-900 text-xl hover:text-amber-200"/></span><Link to="/profile" className="hover:text-amber-200 text-lg">Profile</Link></li>
+          <li className="flex justify-center items-center gap-3 hover:text-amber-200"> <span className="pe-4"><BiLogOutCircle className="text-amber-900 text-xl hover:text-amber-200" /></span> <Link to="/logout" className="hover:text-amber-200 text-lg ">Logout</Link></li>
         </ul>
       </div>
     </div>
