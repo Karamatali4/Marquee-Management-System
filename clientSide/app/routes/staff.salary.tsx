@@ -81,20 +81,20 @@ const containerStyle = {
     <h1 className="text-amber-500 font-bold text-4xl bg-opacity-35">Please Fill Salary Form</h1>
    
     <Form method="post" className="space-y-4 p-10 bg-amber-50 bg-opacity-35 flex flex-col justify-center items-start rounded-md gap-8 shadow-2xl">
-      <input name="employeeName" placeholder="Employee Name" className="outline-none rounded-s-md bg-amber-50  text-amber-950 placeholder:text-amber-500 p-2" required />
-      <input name="designation" placeholder="Designation" className="outline-none rounded-e-lg p-2 bg-amber-50 text-amber-950 placeholder:text-amber-500" required />
+      <input name="employeeName" placeholder="Employee Name" className="outline-none rounded-s-md bg-amber-50 hover:bg-amber-100 text-amber-950 placeholder:text-amber-500 p-2" required />
+      <input name="designation" placeholder="Designation" className="outline-none rounded-e-lg p-2 bg-amber-50 hover:bg-amber-100 text-amber-950 placeholder:text-amber-500" required />
       <input
         type="number"
         name="salaryAmount"
         placeholder="Salary Amount"
-        className="outline-none rounded-s-md p-2 bg-amber-50  text-amber-500 placeholder:text-amber-500"
+        className="outline-none rounded-s-md p-2 bg-amber-50 hover:bg-amber-100  text-amber-500 placeholder:text-amber-500"
         required
       />
-      <input type="date" name="paymentDate" className="outline-none rounded-s-md p-2 bg-amber-50 text-amber-500 placeholder:text-amber-400 focus:outline focus:ring-2 focus:ring-amber-800 focus:border-amber-800" required />
-      <textarea name="notes" placeholder="Notes" className="outline-none rounded-e-md p-2 bg-amber-50 text-amber-950 placeholder:text-amber-500 w-fit" />
+      <input type="date" name="paymentDate" className="outline-none rounded-s-md p-2 bg-amber-50 hover:bg-amber-100 text-amber-500 placeholder:text-amber-400 focus:outline focus:ring-2 focus:ring-amber-800 focus:border-amber-800" required />
+      <textarea name="notes" placeholder="Notes" className="outline-none rounded-e-md p-2 bg-amber-50 hover:bg-amber-100 text-amber-950 placeholder:text-amber-500 w-fit" />
 
       {/* 🔐 Hidden input for token */}
-      <input type="hidden" name="token" className="outline-none rounded-e-md p-2 bg-amber-50 text-amber-950 placeholder:text-amber-500" id="token-field" />
+      <input type="hidden" name="token" className="outline-none rounded-e-md p-2 bg-amber-50  text-amber-950 placeholder:text-amber-500" id="token-field" />
 
       <button className="text-amber-50 px-6 py-2 bg-amber-700 rounded-md self-center hover:bg-amber-600 hover:text-amber-50" type="submit">Submit Salary</button>
     </Form>
