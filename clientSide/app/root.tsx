@@ -6,11 +6,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // ✅ Add this line to import styles
+
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,6 +26,13 @@ export const links: LinksFunction = () => [
   },
 ];
 
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Marquee Management System" },
+    { name: "description", content: "A role-based dashboard for marquee management" },
+  ];
+}; 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -45,8 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const meta = () => [{ title: "Marquee Management System" }];
-
 export default function App() {
-  return <Outlet />; // ✅ Removed semicolon
+  return <Outlet />
 }

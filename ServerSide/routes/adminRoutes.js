@@ -41,10 +41,10 @@ adminRoutes.use(adminMiddleware);
 //  *****************   Users section ******************
 
 // get All users
-adminRoutes.get("/users", adminMiddleware, getAllUsers);
+adminRoutes.get("/users", authMiddleware, adminMiddleware, getAllUsers);
 
 // get single  users
-adminRoutes.get("/users/:id", adminMiddleware, getSingleUsers);
+adminRoutes.get("/users/:id",authMiddleware, adminMiddleware, getSingleUsers);
 // Admin-only: delete a booking
 adminRoutes.delete(
   "/users/:id",
@@ -57,7 +57,7 @@ adminRoutes.delete(
 // Optionally allow update
 adminRoutes.put(
   "/users/:id",
-
+authMiddleware,
   adminMiddleware,
   adminOnly,
   updateUser
@@ -66,11 +66,11 @@ adminRoutes.put(
 //  *****************   Booking section ******************
 
 // get all booking data
-adminRoutes.get("/bookings", adminMiddleware, getAllBookings);
+adminRoutes.get("/bookings",authMiddleware, adminMiddleware, getAllBookings);
 
 
 // get single booking data
-adminRoutes.get("/bookings/:id", adminMiddleware, getSingleBookings);
+adminRoutes.get("/bookings/:id",authMiddleware, adminMiddleware, getSingleBookings);
 
 // Admin-only: delete a booking
 adminRoutes.delete(
@@ -91,7 +91,7 @@ adminRoutes.put(
 //  *****************   Grocery section ******************
 
 // get all grocerie data
-adminRoutes.get("/groceries", adminMiddleware, getAllGroceries);
+adminRoutes.get("/groceries",authMiddleware, adminMiddleware, getAllGroceries);
 
 
 //  get single grocerie
@@ -122,7 +122,7 @@ adminRoutes.put(
 //  *****************   Menu section ******************
 
 // get all Menu data
-adminRoutes.get("/menu", adminMiddleware, getAllMenus);
+adminRoutes.get("/menu",authMiddleware, adminMiddleware, getAllMenus);
 
 
 //  get single a menu
@@ -138,10 +138,10 @@ adminRoutes.put("/menu/:id", authMiddleware, adminMiddleware, updateMenu);
 //  *****************   Salary section ******************
 
 // get all Salary data
-adminRoutes.get("/salaries", adminMiddleware, getAllSalaries);
+adminRoutes.get("/salaries",authMiddleware, adminMiddleware, getAllSalaries);
 
 // get single Salary data
-adminRoutes.get("/salaries/:id", adminMiddleware, getSingleSalaries);
+adminRoutes.get("/salaries/:id",authMiddleware, adminMiddleware, getSingleSalaries);
 
 //  delete a Salary
 adminRoutes.delete(
@@ -161,10 +161,10 @@ adminRoutes.put("/salaries/:id", authMiddleware, adminMiddleware, updateSalary);
 //  *****************   Contact section ******************
 
 // get all Contact data
-adminRoutes.get("/contact", adminMiddleware, getAllContact);
+adminRoutes.get("/contact",authMiddleware, adminMiddleware, getAllContact);
 
 // get single Contact data
-adminRoutes.get("/contact/:id", adminMiddleware, getSingleContact);
+adminRoutes.get("/contact/:id",authMiddleware, adminMiddleware, getSingleContact);
 
 //  delete a Contact
 adminRoutes.delete(
