@@ -63,10 +63,10 @@ export default function AdminUsers() {
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[800px] overflow-y-auto shadow-lg rounded-lg">
-                <table className="table-auto w-full border border-gray-200">
-                  <thead className="sticky top-0 z-10">
-                    <tr className="bg-amber-800 text-amber-50">
+              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[50rem] xl:max-h-[50rem] 2xl:max-h-[50rem] overflow-y-auto shadow-xl rounded-xl">
+                <table className="table-auto w-full border border-gray-200 ">
+                  <thead className="sticky top-0 z-10 ">
+                    <tr className="bg-amber-800 text-amber-50 pb-5 mb-5">
                       {[
                         "Sr No",
                         "Username",
@@ -96,11 +96,11 @@ export default function AdminUsers() {
                         <td className="py-3 px-2 border">{user.email}</td>
                         <td className="py-3 px-2 border">{user.gender}</td>
                         <td className="py-3 px-2 border">{user.phone}</td>
-                        <td className="py-3 px-2 border">{user.role}</td>
+                        <td className="py-3 px-2 border">{user.role.toUpperCase()}</td>
                         <td className="py-3 px-2 border">
                           <a
                             href={`/edit/${user.id}`}
-                            className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
+                            className="bg-amber-500 text-white py-1 px-3 rounded hover:bg-amber-400"
                           >
                             Edit
                           </a>
@@ -108,7 +108,7 @@ export default function AdminUsers() {
                         <td className="py-3 px-2 border">
                           <button
                             onClick={() => alert(`Delete user: ${user.name}`)}
-                            className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
+                            className="bg-amber-800 text-white py-1 px-3 rounded hover:bg-amber-700"
                           >
                             Delete
                           </button>
