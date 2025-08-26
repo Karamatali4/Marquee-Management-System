@@ -16,7 +16,6 @@ type User = {
   email: string;
   gender: string;
   phone: string;
-  password: string;
   role: string;
 };
 
@@ -58,14 +57,13 @@ try {
 // --------------------
 export default function AdminUsers() {
   const users = useLoaderData<User[]>();
-
   return (
     <Layout role="admin">
       <section className="bg-white py-10">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-              <div className="max-w-full overflow-x-auto max-h-[500px] overflow-y-auto shadow-lg rounded-lg">
+              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[800px] overflow-y-auto shadow-lg rounded-lg">
                 <table className="table-auto w-full border border-gray-200">
                   <thead className="sticky top-0 z-10">
                     <tr className="bg-amber-800 text-amber-50">
@@ -76,7 +74,6 @@ export default function AdminUsers() {
                         "Email",
                         "Gender",
                         "Phone",
-                        "Password",
                         "Role",
                         "Edit",
                         "Delete",
@@ -92,14 +89,13 @@ export default function AdminUsers() {
                   </thead>
                   <tbody>
                     {users.map((user, index) => (
-                      <tr key={user.id} className="text-center text-black hover:bg-gray-100">
+                      <tr key={user.id} className="text-center text-amber-950 hover:bg-gray-100">
                         <td className="py-3 px-2 border">{index + 1}</td>
                         <td className="py-3 px-2 border">{user.username}</td>
                         <td className="py-3 px-2 border">{user.name}</td>
                         <td className="py-3 px-2 border">{user.email}</td>
                         <td className="py-3 px-2 border">{user.gender}</td>
                         <td className="py-3 px-2 border">{user.phone}</td>
-                        <td className="py-3 px-2 border">{user.password}</td>
                         <td className="py-3 px-2 border">{user.role}</td>
                         <td className="py-3 px-2 border">
                           <a
