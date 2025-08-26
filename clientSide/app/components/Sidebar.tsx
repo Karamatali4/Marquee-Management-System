@@ -62,11 +62,7 @@ export default function Sidebar({ role }: { role: string }) {
 
           {role === "admin" && (
             <>
-              {/* <li className="flex justify-center items-center gap-3"><Link to="/admin/bookings" className="hover:text-amber-200">Bookings</Link></li>
-              <li className="flex justify-center items-center gap-3"><Link to="/admin/menu" className="hover:text-amber-200">Menu</Link></li>
-              <li className="flex justify-center items-center gap-3"><Link to="/admin/grocery" className="hover:text-amber-200">Grocery</Link></li>
-              <li  className="flex justify-center items-center gap-3"><Link to="/admin/salary" className="hover:text-amber-200">Salary</Link></li>
-              <li className="flex justify-center items-center gap-3"><Link to="/admin/users" className="hover:text-amber-200">Users</Link></li> */}
+              
               <AdminSidebar/>
             </>
           )}
