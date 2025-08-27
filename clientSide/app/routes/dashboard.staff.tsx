@@ -1,32 +1,31 @@
+// app/routes/dashboard.staff.tsx
+import type { LoaderFunction } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import Layout from "~/components/Layout";
-import { useEffect } from "react";
-import { useNavigate } from "@remix-run/react";
-import { toast } from "react-toastify"; // 🆕 Optional: notify user when session expires
+import { getSession } from "~/session.server";
+
+// Loader: server-side auth check using cookies
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+
+  const role = session.get("role");
+  const token = session.get("token");
+
+  if (!token || role !== "staff") {
+    // ❌ Not logged in or not staff
+    return redirect("/login");
+  }
+
+  // ✅ return role if valid
+  return json({ role });
+};
 
 export default function StaffDashboard() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    const expiresAt = Number(localStorage.getItem("expiresAt"));
-
-    // ✅ Redirect if not staff
-    if (role !== "staff") {
-      navigate("/login");
-      return;
-    }
-
-    // ✅ Redirect if token has expired
-    if (Date.now() > expiresAt) {
-      toast.error("Session expired. Please log in again."); // Optional feedback
-      localStorage.clear();
-      navigate("/login");
-      return;
-    }
-  }, [navigate]);
+  const { role } = useLoaderData<{ role: string }>();
 
   return (
-    <Layout role="staff">
+    <Layout role={role}>
       <section className="mainSection mt-8">
         <h1 className="text-2xl text-amber-950 font-bold">Staff Dashboard</h1>
         <p className="text-amber-950">
