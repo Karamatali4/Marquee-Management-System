@@ -3,9 +3,9 @@ import Sidebar from "./Sidebar";
 
 export default function Layout({ children, role }: { children: React.ReactNode; role: string }) {
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col  lg:flex-row min-h-screen md:flex-row  lg:justify-center">
       {/* Sidebar */}
-      <div className="w-full lg:w-64 shadow-black">
+      <div className="w-full  lg:w-64 shadow-black">
         <Sidebar role={role} />
       </div>
 
@@ -14,5 +14,6 @@ export default function Layout({ children, role }: { children: React.ReactNode; 
         {children}
       </main>
     </div>
+    
   );
 }

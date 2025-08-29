@@ -5,7 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import Layout from "~/components/Layout";
 import axios from "axios";
 import { getSession } from "~/session.server";
-
+import "../components/style.css";
 // --------------------
 // User Type
 // --------------------
@@ -52,10 +52,23 @@ try {
   }
 };
 
+
+
+const styles: { scrollbar: React.CSSProperties } = {
+  scrollbar: {
+    overflowY: "scroll",
+    scrollBehavior: "smooth",
+    
+  },
+};
+
+
+
 // --------------------
 // Component (client)
 // --------------------
 export default function AdminUsers() {
+
   const users = useLoaderData<User[]>();
   return (
     <Layout role="admin">
@@ -63,8 +76,8 @@ export default function AdminUsers() {
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[50rem] xl:max-h-[50rem] 2xl:max-h-[50rem] overflow-y-auto shadow-xl rounded-xl">
-                <table className="table-auto w-full border border-gray-200 ">
+              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[50rem] xl:max-h-[50rem] 2xl:max-h-[50rem] overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar}>
+                <table className="table-auto w-full border border-gray-200">
                   <thead className="sticky top-0 z-10 ">
                     <tr className="bg-amber-800 text-amber-50 pb-5 mb-5">
                       {[
