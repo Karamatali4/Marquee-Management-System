@@ -1,7 +1,7 @@
 
 import type { LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import Layout from "~/components/Layout";
 import axios from "axios";
 import { getSession } from "~/session.server";
@@ -10,7 +10,7 @@ import "../components/style.css";
 // User Type
 // --------------------
 type User = {
-  id: number;
+  _id: number;
   username: string;
   name: string;
   email: string;
@@ -48,7 +48,7 @@ try {
   } catch (error) {
     console.log("Error fetching users:", error);
 
-    // throw new Response("Failed to fetch users", { status: 500 });
+    throw new Response("Failed to fetch users", { status: 500 });
   }
 };
 
@@ -70,6 +70,7 @@ const styles: { scrollbar: React.CSSProperties } = {
 export default function AdminUsers() {
 
   const users = useLoaderData<User[]>();
+  // console.log("User ID:", users);
   return (
     <Layout role="admin">
       <section className="bg-white py-10">
@@ -102,7 +103,7 @@ export default function AdminUsers() {
                   </thead>
                   <tbody>
                     {users.map((user, index) => (
-                      <tr key={user.id} className="text-center text-amber-950 hover:bg-gray-100">
+                      <tr key={user._id} className="text-center text-amber-950 hover:bg-gray-100">
                         <td className="py-3 px-2 border">{index + 1}</td>
                         <td className="py-3 px-2 border">{user.username}</td>
                         <td className="py-3 px-2 border">{user.name}</td>
@@ -111,20 +112,25 @@ export default function AdminUsers() {
                         <td className="py-3 px-2 border">{user.phone}</td>
                         <td className="py-3 px-2 border">{user.role.toUpperCase()}</td>
                         <td className="py-3 px-2 border">
-                          <a
-                            href={`/edit/${user.id}`}
-                            className="bg-amber-500 text-white py-1 px-3 rounded hover:bg-amber-400"
-                          >
-                            Edit
-                          </a>
+                          
+
+                          <Link
+  to={`/editUser/${user._id}`}
+  className="bg-amber-500 text-white py-1 px-3 rounded hover:bg-amber-400"
+>
+  Edit
+</Link>
+
                         </td>
                         <td className="py-3 px-2 border">
                           <button
                             onClick={() => alert(`Delete user: ${user.name}`)}
                             className="bg-amber-800 text-white py-1 px-3 rounded hover:bg-amber-700"
                           >
+
                             Delete
                           </button>
+                          
                         </td>
                       </tr>
                     ))}
