@@ -27,7 +27,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  console.log("params data:", params.id )
   return json(res.data);
 }
 
@@ -44,11 +43,11 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const email = formData.get("email");
   const phone = formData.get("phone");
   const gender = formData.get("gender");
-  const role = formData.get("gender");
+  const role = formData.get("role");
 
   await axios.put(
     `http://localhost:5000/api/admin/users/${params.id}`,
-    { name, email, phone, gender },
+    { username,name, email, phone, gender,role },
     { headers: { Authorization: `Bearer ${token}` } }
   );
 
@@ -60,10 +59,11 @@ export default function EditUsers() {
  const navigate = useNavigate();
   return (
     <Layout role="admin">
-    <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Edit User: {user.username}</h2>
-      <Form method="post" className="space-y-4">
+    <div className="max-w-xl mx-auto mt-10 bg-amber-100 p-6 rounded-s-2xl shadow">
+      <h2 className="text-2xl font-bold mb-4 text-amber-900">Edit User: {user.username}</h2>
+      <Form method="post" className="space-y-4 m-5">
         <div>
+          <input type="text" name="username" defaultValue={user.username} className="text-amber-50 rounded  w-full border px-3 py-2" placeholder="Enter User  Name" />
           <input type="text" name="name" defaultValue={user.name} className="text-amber-50 rounded  w-full border px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
@@ -73,10 +73,18 @@ export default function EditUsers() {
           <input type="text" name="phone" defaultValue={user.phone} className="w-full border px-3 py-2 rounded " placeholder="Phone"  />
         </div>
         <div>
-          <label>Gender:</label>
+          <label className="text-amber-950 font-bold">Gender:</label>
           <select name="gender" defaultValue={user.gender} className="w-full border px-3 py-2 rounded ">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="text-amber-950 font-bold">Role:</label>
+          <select name="role" defaultValue={user.role} className="w-full border px-3 py-2 rounded ">
+            <option value="admin">ADMIN</option>
+            <option value="staff">STAFF</option>
           </select>
         </div>
         
