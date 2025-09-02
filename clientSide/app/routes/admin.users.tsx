@@ -1,11 +1,13 @@
 
-import type { LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Form, Link, useFetcher, useLoaderData } from "@remix-run/react";
 import Layout from "~/components/Layout";
 import axios from "axios";
 import { getSession } from "~/session.server";
 import "../components/style.css";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 // --------------------
 // User Type
 // --------------------
@@ -17,6 +19,32 @@ type User = {
   gender: string;
   phone: string;
   role: string;
+};
+
+
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+  const userId = formData.get("id");
+  const session = await getSession(request.headers.get("Cookie"));
+  const token = session.get("token");
+
+  if (!token || !userId) return json({ status: "error" });
+
+  if (intent === "delete") {
+    try {
+      await axios.delete(`http://localhost:5000/api/admin/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return json({ status: "deleted" });
+    } catch (error) {
+      console.error("Delete failed:", error);
+      return json({ status: "error" });
+    }
+  }
+
+  return json({ status: "error" });
 };
 
 // --------------------
@@ -68,9 +96,20 @@ const styles: { scrollbar: React.CSSProperties } = {
 // Component (client)
 // --------------------
 export default function AdminUsers() {
+const fetcher = useFetcher();
 
   const users = useLoaderData<User[]>();
-  // console.log("User ID:", users);
+  
+  useEffect(() => {
+    if ((fetcher.data as { status?: string })?.status === "deleted") {
+  toast.success("User deleted successfully!");
+}
+if ((fetcher.data as { status?: string })?.status === "error") {
+  toast.success("Failed to delete user.");
+}
+    
+  }, [fetcher.data]);
+
   return (
     <Layout role="admin">
       <section className="bg-white py-10">
@@ -110,7 +149,7 @@ export default function AdminUsers() {
                         <td className="py-3 px-2 border">{user.email}</td>
                         <td className="py-3 px-2 border">{user.gender}</td>
                         <td className="py-3 px-2 border">{user.phone}</td>
-                        <td className="py-3 px-2 border">{user.role.toUpperCase()}</td>
+                        <td className="py-3 px-2 border">{user.role?.toUpperCase()}</td>
                         <td className="py-3 px-2 border">
                           
 
@@ -123,13 +162,26 @@ export default function AdminUsers() {
 
                         </td>
                         <td className="py-3 px-2 border">
-                          <button
+                          {/* <button
                             onClick={() => alert(`Delete user: ${user.name}`)}
                             className="bg-amber-800 text-white py-1 px-3 rounded hover:bg-amber-700"
                           >
 
                             Delete
-                          </button>
+                          </button> */}
+                          <fetcher.Form method="post">
+  <input type="hidden" name="id" value={user._id} />
+  <button
+    type="submit"
+    name="intent"
+    value="delete"
+    className="bg-amber-800 text-white py-1 px-3 rounded hover:bg-amber-700"
+  >
+    Delete
+  </button>
+</fetcher.Form>
+
+
                           
                         </td>
                       </tr>
