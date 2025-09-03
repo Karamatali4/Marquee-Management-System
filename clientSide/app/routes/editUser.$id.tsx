@@ -1,8 +1,11 @@
 import { json, redirect, type LoaderFunctionArgs, type ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, Form, Link, useNavigate } from "@remix-run/react";
 import axios from "axios";
+import Lottie, { useLottie } from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
+import formFill from "../../public/LoginandSign up.json";
+import { Player } from '@lottiefiles/react-lottie-player';
 
 type User = {
   id: number;
@@ -57,24 +60,47 @@ export async function action({ request, params }: ActionFunctionArgs) {
 export default function EditUsers() {
   const user = useLoaderData<User>();
  const navigate = useNavigate();
+
+//  const options = {
+//     animationData: formFill,
+//     loop: true,
+//     autoplay: true,
+    
+    
+//   };
+
+  // const { View } = useLottie(options);
   return (
     <Layout role="admin">
-    <div className="max-w-xl mx-auto mt-10 bg-amber-100 p-6 rounded-s-2xl shadow">
-      <h2 className="text-2xl font-bold mb-4 text-amber-900">Edit User: {user.username}</h2>
-      <Form method="post" className="space-y-4 m-5">
+    <div className="mt-10 bg-amber-50 p-6 rounded-s-2xl shadow flex justify-start items-center gap-3 ">
+      <div className="image">
+            <Lottie 
+            animationData={formFill}
+            loop={true}
+            autoplay={true}
+            className="w-[50rem]"
+            
+          />
+         
+   
+    
+      </div>
+      <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg">
+      <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit User: {user.username}</h2>
+
         <div>
-          <input type="text" name="username" defaultValue={user.username} className="text-amber-50 rounded  w-full border px-3 py-2" placeholder="Enter User  Name" />
-          <input type="text" name="name" defaultValue={user.name} className="text-amber-50 rounded  w-full border px-3 py-2" placeholder="Enter Name" />
+          <input type="text" name="username" defaultValue={user.username} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2" placeholder="Enter User  Name" />
+          <input type="text" name="name" defaultValue={user.name} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
-          <input type="email" className="text-amber-50 w-full border px-3 py-2 rounded " name="email" defaultValue={user.email} placeholder="Email"  />
+          <input type="email" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="email" defaultValue={user.email} placeholder="Email"  />
         </div>
         <div>
-          <input type="text" name="phone" defaultValue={user.phone} className="w-full border px-3 py-2 rounded " placeholder="Phone"  />
+          <input type="text" name="phone" defaultValue={user.phone} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
         </div>
         <div>
           <label className="text-amber-950 font-bold">Gender:</label>
-          <select name="gender" defaultValue={user.gender} className="w-full border px-3 py-2 rounded ">
+          <select name="gender" defaultValue={user.gender} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded ">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
@@ -82,7 +108,7 @@ export default function EditUsers() {
 
         <div>
           <label className="text-amber-950 font-bold">Role:</label>
-          <select name="role" defaultValue={user.role} className="w-full border px-3 py-2 rounded ">
+          <select name="role" defaultValue={user.role} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded ">
             <option value="admin">ADMIN</option>
             <option value="staff">STAFF</option>
           </select>
