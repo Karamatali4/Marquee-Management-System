@@ -1,11 +1,10 @@
 import { json, redirect, type LoaderFunctionArgs, type ActionFunctionArgs } from "@remix-run/node";
 import { useLoaderData, Form, Link, useNavigate } from "@remix-run/react";
 import axios from "axios";
-import Lottie, { useLottie } from "lottie-react";
+import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
-import formFill from "../../public/LoginandSign up.json";
-import { Player } from '@lottiefiles/react-lottie-player';
+import { useEffect, useState } from "react";
 
 type User = {
   id: number;
@@ -60,7 +59,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 export default function EditUsers() {
   const user = useLoaderData<User>();
  const navigate = useNavigate();
-
+const [formIMG, setAnimationData] = useState(null);
 //  const options = {
 //     animationData: formFill,
 //     loop: true,
@@ -70,17 +69,31 @@ export default function EditUsers() {
 //   };
 
   // const { View } = useLottie(options);
+
+ useEffect(() => {
+  fetch("/LoginandSignup.json")
+    .then((res) => res.json())
+    .then((data) => setAnimationData(data))
+    .catch((err) => console.error("Failed to load animation:", err));
+}, []);
+
+
+
   return (
     <Layout role="admin">
-    <div className="mt-10 bg-amber-50 p-6 rounded-s-2xl shadow flex justify-start items-center gap-3 ">
+    <div className=" bg-amber-50 p-6 rounded-s-2xl shadow flex justify-start items-center gap-3 ">
       <div className="image">
-            <Lottie 
-            animationData={formFill}
-            loop={true}
-            autoplay={true}
-            className="w-[50rem]"
-            
-          />
+            {formIMG ? (
+    <Lottie
+      animationData={formIMG}
+      loop
+      autoplay
+      className="w-[50rem] "
+    />
+  ) : (
+    <p className="text-amber-700">Loading animation...</p>
+  )}
+
          
    
     
@@ -89,7 +102,7 @@ export default function EditUsers() {
       <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit User: {user.username}</h2>
 
         <div>
-          <input type="text" name="username" defaultValue={user.username} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2" placeholder="Enter User  Name" />
+          <input type="text" name="username" defaultValue={user.username} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter User  Name" />
           <input type="text" name="name" defaultValue={user.name} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
@@ -114,7 +127,7 @@ export default function EditUsers() {
           </select>
         </div>
         
-         <button onClick={() => navigate(-1)} className="bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-700 me-3">
+         <button onClick={() => navigate(-1)} className="bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-700 ">
           Cancel
         </button>
         <button type="submit" className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-500">
