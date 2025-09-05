@@ -60,15 +60,7 @@ export default function EditUsers() {
   const user = useLoaderData<User>();
  const navigate = useNavigate();
 const [formIMG, setAnimationData] = useState(null);
-//  const options = {
-//     animationData: formFill,
-//     loop: true,
-//     autoplay: true,
-    
-    
-//   };
 
-  // const { View } = useLottie(options);
 
  useEffect(() => {
   fetch("/LoginandSignup.json")
