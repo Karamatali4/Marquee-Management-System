@@ -285,7 +285,7 @@ const updateMenu = async (req, res) => {
 const getAllSalaries = async (req, res) => {
   try {
     const salaries = await Salary.find();
-    res.status(200).json({ msg: `salaries: ${salaries}` });
+    res.status(200).json(salaries );
     console.log("All salaries: ", salaries);
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -302,7 +302,7 @@ const getSingleSalaries = async (req, res) => {
     if (!salary) {
       return res.status(404).json({ error: "salary not found" });
     }
-    res.status(200).json({ msg: "get Single salary  successfully",salary });
+    res.status(200).json( salary );
     console.error("get single  salary:" , salary);
 
   } catch (error) {
