@@ -12,7 +12,6 @@ type Salary = {
   designation: string;
   salaryAmount: string;
   paymentDate: string;
-  phone: string;
   notes: string;
 };
 
@@ -40,11 +39,11 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const token = session.get("token");
 
   const formData = await request.formData();
-  const employeeName= formData.get("salaryname");
-  const designation = formData.get("name");
-  const salaryAmount = formData.get("email");
-  const paymentDate = formData.get("phone");
-  const notes = formData.get("gender");
+  const employeeName= formData.get("employeeName");
+  const designation = formData.get("designation");
+  const salaryAmount = formData.get("salaryAmount");
+  const paymentDate = formData.get("paymentDate");
+  const notes = formData.get("notes");
 
 
   
@@ -66,7 +65,7 @@ const [formIMG, setAnimationData] = useState(null);
 
 
  useEffect(() => {
-  fetch("/Microinteractions.json")
+  fetch("/salary.json")
     .then((res) => res.json())
     .then((data) => setAnimationData(data))
     .catch((err) => console.error("Failed to load animation:", err));
@@ -76,14 +75,14 @@ const [formIMG, setAnimationData] = useState(null);
 
   return (
     <Layout role="admin">
-    <div className=" bg-amber-50 p-6 rounded-s-2xl shadow flex justify-start items-center gap-3 ">
+    <div className=" bg-amber-50  p-6 rounded-s-2xl shadow flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-3 ">
       <div className="image">
             {formIMG ? (
     <Lottie
       animationData={formIMG}
       loop
       autoplay
-      className="w-[50rem] "
+      className="lg:w-[50rem] "
     />
   ) : (
     <p className="text-amber-700">Loading animation...</p>
@@ -93,21 +92,23 @@ const [formIMG, setAnimationData] = useState(null);
    
     
       </div>
-      <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg">
+      <Form method="post" className="space-y-4 m-5 bg-amber-50  flex flex-col gap-3 shadow-lg">
       <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit salary: {salary.employeeName}</h2>
 
         <div>
-          <input type="text" name="salaryname" defaultValue={salary.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter salary  Name" />
-          <input type="text" name="name" defaultValue={salary.salaryAmount} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
+          <input type="text" name="employeeName" defaultValue={salary.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter salary  Name" />
+          <input type="text" name="designation" defaultValue={salary.salaryAmount} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
-          <input type="email" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="email" defaultValue={salary.paymentDate} placeholder="Email"  />
+          <input type="salaryAmount" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="salaryAmount" defaultValue={salary.salaryAmount} placeholder="Email"  />
         </div>
         <div>
-          <input type="text" name="phone" defaultValue={salary.notes} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
+          <input type="text" name="paymentDate" defaultValue={salary.paymentDate} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
         </div>
         
-
+<div>
+          <input type="text" name="notes" defaultValue={salary.notes} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Notes"  />
+        </div>
         
         
          <button onClick={() => navigate(-1)} className="bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-700 ">

@@ -149,7 +149,7 @@ if ((fetcher.data as { status?: string })?.status === "error") {
                         <td className="py-3 px-2 border">{salary.employeeName}</td>
                         <td className="py-3 px-2 border">{salary.designation}</td>
                         <td className="py-3 px-2 border">{salary.salaryAmount}</td>
-                        <td className="py-3 px-2 border">{salary.paymentDate}</td>
+                        <td className="py-3 px-2 border">{new Date(salary.paymentDate).toLocaleDateString()}</td>
                         <td className="py-3 px-2 border">{salary.notes}</td>
                         <td className="py-3 px-2 border">
                           

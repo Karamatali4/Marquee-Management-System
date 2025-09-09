@@ -145,7 +145,7 @@ const updateBooking = async (req, res) => {
 const getAllGroceries = async (req, res) => {
   try {
     const groceries = await Grocery.find();
-    res.status(200).json({ msg: `groceries: ${groceries}` });
+    res.status(200).json(groceries);
     console.log("All groceries: ", groceries);
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -162,7 +162,7 @@ const getSingleGrocery = async (req, res) => {
     if (!grocery) {
       return res.status(404).json({ error: "grocery not found" });
     }
-    res.status(200).json({ msg: "get Single grocery  successfully",grocery });
+    res.status(200).json(grocery);
     console.error(" get Single  grocery:", grocery);
 
   } catch (error) {
