@@ -10,7 +10,7 @@ export default function Layout({ children, role }: { children: React.ReactNode; 
       </div>
 
       {/* Main content */}
-      <main className="flex-1 min-h-screen bg-white p-6 ">
+      <main className="flex-1 min-h-screen  bg-white p-6 ">
         {children}
       </main>
     </div>

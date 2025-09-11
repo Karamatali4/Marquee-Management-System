@@ -4,7 +4,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 type Salary = {
   _id: string;
@@ -71,6 +71,14 @@ const [formIMG, setAnimationData] = useState(null);
     .catch((err) => console.error("Failed to load animation:", err));
 }, []);
 
+const [value, setValue] = useState<string>('');
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputText = e.target.value;
+    const filteredText = inputText.replace(/[^a-zA-Z\s]/g, '');
+    setValue(filteredText);
+  };
+
 
 
   return (
@@ -96,14 +104,16 @@ const [formIMG, setAnimationData] = useState(null);
       <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit salary: {salary.employeeName}</h2>
 
         <div>
-          <input type="text" name="employeeName" defaultValue={salary.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter salary  Name" />
-          <input type="text" name="designation" defaultValue={salary.salaryAmount} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
+          <input type="text" name="employeeName" onChange={handleChange}
+ defaultValue={salary.employeeName} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter Employee Name" />
+          <input type="text" onChange={handleChange}
+ name="designation" defaultValue={salary.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Designation" />
         </div>
         <div>
-          <input type="salaryAmount" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="salaryAmount" defaultValue={salary.salaryAmount} placeholder="Email"  />
+          <input type="number" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="salaryAmount" defaultValue={salary.salaryAmount} placeholder="Enter Salary Amount"  />
         </div>
         <div>
-          <input type="text" name="paymentDate" defaultValue={salary.paymentDate} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
+          <input type="date" name="paymentDate" defaultValue={salary.paymentDate} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="date"  />
         </div>
         
 <div>
