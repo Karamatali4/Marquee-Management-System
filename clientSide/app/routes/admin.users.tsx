@@ -116,7 +116,11 @@ if ((fetcher.data as { status?: string })?.status === "error") {
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-              <div className="max-w-full overflow-x-auto max-h-[30rem] lg:max-h-auto xl:max-h-auto 2xl:max-h-auto overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar}>
+              <div className="max-w-full overflow-x-auto  max-h-[70vh] lg:max-h-auto xl:max-h-auto 2xl:max-h-auto overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar} >
+                <div
+  className="overflow-y-auto shadow-xl rounded-xl custom-scroll"
+>
+
                 <table className="table-auto w-full border border-gray-200">
                   <thead className="sticky top-0 z-10 ">
                     <tr className="bg-amber-800 text-amber-50 pb-5 mb-5">
@@ -188,6 +192,7 @@ if ((fetcher.data as { status?: string })?.status === "error") {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>
