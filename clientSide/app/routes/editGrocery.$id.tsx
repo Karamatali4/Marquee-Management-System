@@ -4,7 +4,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 type Grocery = {
   _id: string;
@@ -58,6 +58,12 @@ export default function Editgrocerys() {
  const navigate = useNavigate();
 const [formIMG, setAnimationData] = useState(null);
 
+const [formData, setFormData] = useState({
+  date: grocery.date,
+  itemName: grocery.itemName,
+  quantity: grocery.quantity,
+  cost: grocery.cost,
+});
 
  useEffect(() => {
   fetch("/LoginandSignup.json")
@@ -66,6 +72,20 @@ const [formIMG, setAnimationData] = useState(null);
     .catch((err) => console.error("Failed to load animation:", err));
 }, []);
 
+const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+
+  // Optional: Filter text-only for specific fields
+  const filteredValue =
+    name === "itemName"
+      ? value.replace(/[^a-zA-Z\s]/g, '')
+      : value;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: filteredValue,
+  }));
+};
 
 
   return (
@@ -92,14 +112,14 @@ const [formIMG, setAnimationData] = useState(null);
       {/* <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit grocery: {grocery.g}</h2> */}
 
         <div>
-          <input type="date" name="date" defaultValue={new  Date(grocery.date).toLocaleDateString()} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter grocery  Date" />
-          <input type="text" name="itemName" defaultValue={grocery.itemName} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
+          <input type="date" name="date" value={formData.date} defaultValue={new  Date(grocery.date).toLocaleDateString()} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter grocery  Date" />
+          <input type="text" name="itemName"  onChange={handleChange} value={formData.itemName} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
-          <input type="text" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="quantity" defaultValue={grocery.quantity} placeholder="Quantity"  />
+          <input type="number" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="quantity" defaultValue={grocery.quantity} placeholder="Quantity"  />
         </div>
         <div>
-          <input type="text" name="cost" defaultValue={grocery.cost} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Cost"  />
+          <input type="number" name="cost" defaultValue={grocery.cost} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Cost"  />
         </div>
         
 

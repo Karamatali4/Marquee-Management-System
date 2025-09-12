@@ -63,6 +63,13 @@ export default function EditSalary() {
  const navigate = useNavigate();
 const [formIMG, setAnimationData] = useState(null);
 
+const [formData, setFormData] = useState({
+  employeeName: salary.employeeName,
+  designation: salary.designation,
+  salaryAmount: salary.salaryAmount,
+  paymentDate: salary.paymentDate,
+  notes: salary.notes,
+});
 
  useEffect(() => {
   fetch("/salary.json")
@@ -71,26 +78,35 @@ const [formIMG, setAnimationData] = useState(null);
     .catch((err) => console.error("Failed to load animation:", err));
 }, []);
 
-const [value, setValue] = useState<string>('');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputText = e.target.value;
-    const filteredText = inputText.replace(/[^a-zA-Z\s]/g, '');
-    setValue(filteredText);
-  };
+
+const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
+
+  // Optional: Filter text-only for specific fields
+  const filteredValue =
+    name === "employeeName" || name === "designation"
+      ? value.replace(/[^a-zA-Z\s]/g, '')
+      : value;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: filteredValue,
+  }));
+};
 
 
 
   return (
     <Layout role="admin">
-    <div className=" bg-amber-50  p-6 rounded-s-2xl shadow flex flex-col lg:flex-row justify-center lg:justify-start items-center gap-3 ">
+    <div className=" bg-amber-50 rounded-s-2xl shadow flex ">
       <div className="image">
             {formIMG ? (
     <Lottie
       animationData={formIMG}
       loop
       autoplay
-      className="lg:w-[50rem] "
+      className="lg:w-[30rem]"
     />
   ) : (
     <p className="text-amber-700">Loading animation...</p>
@@ -104,10 +120,10 @@ const [value, setValue] = useState<string>('');
       <h2 className="text-2xl font-bold mb-4 text-amber-900 underline decoration-wavy">Edit salary: {salary.employeeName}</h2>
 
         <div>
-          <input type="text" name="employeeName" onChange={handleChange}
+          <input type="text" name="employeeName" onChange={handleChange} value={formData.employeeName}
  defaultValue={salary.employeeName} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter Employee Name" />
           <input type="text" onChange={handleChange}
- name="designation" defaultValue={salary.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Designation" />
+ name="designation" defaultValue={salary.designation} value={formData.designation} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Designation" />
         </div>
         <div>
           <input type="number" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="salaryAmount" defaultValue={salary.salaryAmount} placeholder="Enter Salary Amount"  />

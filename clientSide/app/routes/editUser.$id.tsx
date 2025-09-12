@@ -4,7 +4,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 type User = {
   id: number;
@@ -61,6 +61,14 @@ export default function EditUsers() {
  const navigate = useNavigate();
 const [formIMG, setAnimationData] = useState(null);
 
+const [formData, setFormData] = useState({
+  username: user.username,
+  name: user.name,
+  email: user.email,
+  phone: user.phone,
+  gender: user.gender,
+  role: user.role,
+});
 
  useEffect(() => {
   fetch("/LoginandSignup.json")
@@ -69,7 +77,20 @@ const [formIMG, setAnimationData] = useState(null);
     .catch((err) => console.error("Failed to load animation:", err));
 }, []);
 
+const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const { name, value } = e.target;
 
+  // Optional: Filter text-only for specific fields
+  const filteredValue =
+    name === "name" 
+      ? value.replace(/[^a-zA-Z\s]/g, '')
+      : value;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: filteredValue,
+  }));
+};
 
   return (
     <Layout role="admin">
@@ -80,7 +101,7 @@ const [formIMG, setAnimationData] = useState(null);
       animationData={formIMG}
       loop
       autoplay
-      className="w-[50rem] "
+      className=" lg:w-[50rem] "
     />
   ) : (
     <p className="text-amber-700">Loading animation...</p>
@@ -95,13 +116,13 @@ const [formIMG, setAnimationData] = useState(null);
 
         <div>
           <input type="text" name="username" defaultValue={user.username} className="text-amber-950 bg-transparent border border-amber-300 outline-none  rounded  w-full px-3 py-2 mb-6" placeholder="Enter User  Name" />
-          <input type="text" name="name" defaultValue={user.name} className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
+          <input type="text" name="name" onChange={handleChange} value={formData.name}  className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded  w-full  px-3 py-2" placeholder="Enter Name" />
         </div>
         <div>
           <input type="email" className="text-amber-950 bg-transparent border border-amber-300 outline-none w-full  px-3 py-2 rounded " name="email" defaultValue={user.email} placeholder="Email"  />
         </div>
         <div>
-          <input type="text" name="phone" defaultValue={user.phone} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
+          <input type="number" name="phone" defaultValue={user.phone} className="w-full text-amber-950 bg-transparent border border-amber-300 outline-none px-3 py-2 rounded " placeholder="Phone"  />
         </div>
         <div>
           <label className="text-amber-950 font-bold">Gender:</label>
