@@ -75,7 +75,7 @@ const updateUser = async (req, res) => {
 const getAllBookings = async (req, res) => {
   try {
     const bookings = await Booking.find();
-    res.status(200).json({ msg: `bookings: ${bookings}` });
+    res.status(200).json(bookings);
     console.log("All Bookings: ", bookings);
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -217,7 +217,7 @@ const updateGrocery = async (req, res) => {
 const getAllMenus = async (req, res) => {
   try {
     const menus = await Menu.find();
-    res.status(200).json({ msg: `menus: ${menus}` });
+    res.status(200).json(menus);
     console.log("All menus: ",{msg: `menus: ${menus}`});
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -233,7 +233,7 @@ const getSingleMenu = async (req, res) => {
     if (!menu) {
       return res.status(404).json({ error: "menu not found" });
     }
-    res.status(200).json({ msg: "get single menu successfully",menu });
+    res.status(200).json(menu );
     console.error(" Get single menu", menu);
 
   } catch (error) {
