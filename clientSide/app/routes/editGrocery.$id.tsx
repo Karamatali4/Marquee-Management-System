@@ -91,14 +91,14 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   return (
     <Layout role="admin">
       
-    <div className=" bg-amber-50  rounded-s-2xl shadow flex justify-start items-center gap-3 ">
+    <div className=" bg-amber-50 max-h-[100vh] lg:max-h-[70vh]  scroll-auto  rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center gap-3 ">
       <div className="image">
             {formIMG ? (
     <Lottie
       animationData={formIMG}
       loop
       autoplay
-      className="min-w-[]  md:max-w-[] "
+      className=" lg:min-w-[50rem]  md:max-w-[40rem] "
     />
   ) : (
     <p className="text-amber-700">Loading animation...</p>

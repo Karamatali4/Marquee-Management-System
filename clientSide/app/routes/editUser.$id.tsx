@@ -94,7 +94,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
   return (
     <Layout role="admin">
-    <div className=" bg-amber-50 p-6 rounded-s-2xl shadow flex justify-start items-center gap-3 ">
+    <div className=" bg-amber-50 max-h-[70vh] p-6 rounded-s-2xl shadow flex flex-col lg:flex-row  lg:justify-start LG:items-center gap-3 ">
       <div className="image">
             {formIMG ? (
     <Lottie

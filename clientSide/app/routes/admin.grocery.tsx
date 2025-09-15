@@ -114,11 +114,11 @@ if ((fetcher.data as { status?: string })?.status === "error") {
 
   return (
     <Layout role="admin">
-      <section className="bg-white py-10">
+      <section className="bg-white py-10 max-h-[70vh]">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
-              <div className="max-w-full overflow-x-auto max-h-[50rem] lg:max-h-[50rem] xl:max-h-[50rem] 2xl:max-h-[50rem] overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar}>
+              <div className="max-w-full overflow-x-auto max-h-[50rem]  overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar}>
                 <table className="table-auto w-full border border-gray-200">
                   <thead className="sticky top-0 z-10 ">
                     <tr className="bg-amber-800 text-amber-50 pb-5 mb-5">
