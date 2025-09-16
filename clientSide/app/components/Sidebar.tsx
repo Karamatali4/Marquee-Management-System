@@ -11,7 +11,7 @@ import AdminSidebar from "./dashboard/adminSidebar";
 export default function Sidebar({ role }: { role: string }) {
   const [isOpen, setIsOpen] = useState(true);
   const sidebarRef = useRef<HTMLDivElement>(null);
-
+const roleAdmin = "admin"
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -82,7 +82,8 @@ export default function Sidebar({ role }: { role: string }) {
             </>
           )}
 
-          <li className="flex justify-center items-center gap-3 hover:text-amber-200"><span className="pe-4"><CgProfile className="text-amber-900 text-xl hover:text-amber-200"/></span><Link to="/profile" className="hover:text-amber-200 text-lg">Profile</Link></li>
+          
+          <li className="flex justify-center items-center gap-3 hover:text-amber-200"><span className="pe-4"><CgProfile className="text-amber-900 text-xl hover:text-amber-200"/></span><Link to={`/${role}/profile`} className="hover:text-amber-200 text-lg">Profile</Link></li>
           <li className="flex justify-center items-center gap-3 hover:text-amber-200"> <span className="pe-4"><BiLogOutCircle className="text-amber-900 text-xl hover:text-amber-200" /></span> <Link to="/logout" className="hover:text-amber-200 text-lg ">Logout</Link></li>
         </ul>
       </div>

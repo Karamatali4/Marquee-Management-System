@@ -12,6 +12,38 @@ interface ActionData {
   error?: string;
 }
 
+// export const action: ActionFunction = async ({ request }) => {
+//   const form = await request.formData();
+//   const username = form.get("username") as string;
+//   const password = form.get("password") as string;
+
+//   try {
+//     const response = await axios.post("http://localhost:5000/api/auth/login", {
+//       username,
+//       password,
+//     });
+
+//     const { token, role,userId } = response.data;
+// const user = response.data;
+//     const session = await getSession(request.headers.get("Cookie"));
+//     session.set("token", token);
+//     session.set("role", role);
+//     session.set("userId", userId);
+//     session.set("user", user);
+//     return redirect(`/dashboard/${role}`, {
+//       headers: {
+//         "Set-Cookie": await commitSession(session),
+//       },
+//     });
+//   } catch (error: any) {
+//     const message =
+//       error.response?.data?.error || "Login failed. Please try again.";
+//     return json<ActionData>({ error: message }, { status: 400 });
+//   }
+// };
+
+
+
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const username = form.get("username") as string;
@@ -23,12 +55,15 @@ export const action: ActionFunction = async ({ request }) => {
       password,
     });
 
-    const { token, role } = response.data;
+    const { token, role, user } = response.data; // 👈 directly pick user object
 
     const session = await getSession(request.headers.get("Cookie"));
     session.set("token", token);
     session.set("role", role);
+    session.set("userId", user._id);
+    session.set("user", user); // ✅ sirf user ka object save karna hai
 
+    console.log("user data",user)
     return redirect(`/dashboard/${role}`, {
       headers: {
         "Set-Cookie": await commitSession(session),

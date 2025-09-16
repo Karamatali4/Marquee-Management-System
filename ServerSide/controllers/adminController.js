@@ -90,7 +90,7 @@ const getSingleBookings = async (req, res) => {
     if (!booking) {
       return res.status(404).json({ error: "Booking not found" });
     }
-    res.status(200).json({ msg: booking });
+    res.status(200).json(booking );
     console.log("Get single Booking data",booking);
   } catch (error) {
     console.error("Error Get single  booking:", error);

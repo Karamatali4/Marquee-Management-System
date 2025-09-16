@@ -26,7 +26,7 @@ import { TbBrandBooking } from 'react-icons/tb'
     </span>
         </li>
         <li className='flex flex-col justify-center items-center gap-4'>
-        <li  > <Link to="/admin/bookings" className="hover:text-amber-200 text-lg ps-2">Bookings</Link></li>
+        <li  > <Link to="/admin/booking" className="hover:text-amber-200 text-lg ps-2">Bookings</Link></li>
                   <li  > <Link to="/admin/menu" className="hover:text-amber-200 text-lg">Menu</Link></li>
     
                   <li  ><Link to="/admin/grocery" className="hover:text-amber-200 text-lg">Grocery</Link></li>
