@@ -14,6 +14,7 @@ import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Skeleton } from "antd";
 
 // --------------------
 // Type Definition
@@ -125,7 +126,9 @@ export default function Editmenus() {
               className="lg:min-w-[50rem] md:max-w-[40rem]"
             />
           ) : (
-            <p className="text-amber-700">Loading animation...</p>
+            // <p className="text-amber-700">Loading animation...</p>
+            <Skeleton avatar paragraph={{ rows: 4 }} />
+
           )}
         </div>
 

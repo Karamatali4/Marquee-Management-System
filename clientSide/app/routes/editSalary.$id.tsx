@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Skeleton } from "antd";
 
 type Salary = {
   _id: string;
@@ -109,7 +110,9 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       className="lg:w-[30rem] shadow-lg"
     />
   ) : (
-    <p className="text-amber-700">Loading animation...</p>
+    // <p className="text-amber-700">Loading animation...</p>
+            <Skeleton avatar paragraph={{ rows: 4 }} />
+
   )}
 
          

@@ -1,5 +1,6 @@
 import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Skeleton } from "antd";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
 
@@ -28,6 +29,7 @@ const user = session.get("user");
 function AdminProfile() {
   const user = useLoaderData<User>();
 
+  const imgURL = "https://user-images.githubusercontent.com/54521023/152731049-cc744a56-1d6f-4945-9566-0fa3b7ad1d24.png";
   return (
     <Layout role="admin">
       <div className="py-4 bg-amber-800 text-white rounded-lg">
@@ -88,10 +90,13 @@ function AdminProfile() {
             <div className="container">
               <div className="relative flex flex-col min-w-0 break-words w-full">
                 <div className="flex-auto p-5 lg:p-10">
-                  <img
-                    src="https://user-images.githubusercontent.com/54521023/152731049-cc744a56-1d6f-4945-9566-0fa3b7ad1d24.png"
+                  {imgURL ? (
+                    <img
+                    src={imgURL}
                     alt="contact image"
                   />
+                  ) : (<Skeleton avatar paragraph={{ rows: 4 }} />)}
+                  
                 </div>
               </div>
             </div>
