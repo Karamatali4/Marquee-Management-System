@@ -77,6 +77,7 @@ export default function Editmenus() {
   const menu = useLoaderData<Menu>();
   const navigate = useNavigate();
   const [formIMG, setAnimationData] = useState(null);
+const [isClient, setIsClient] = useState(false);
 
   const [formData, setFormData] = useState({
     customerName: menu.customerName,
@@ -87,7 +88,7 @@ export default function Editmenus() {
   });
 
   useEffect(() => {
-    fetch("/LoginandSignup.json")
+    fetch("/FoodCarousel.json")
       .then((res) => res.json())
       .then((data) => setAnimationData(data))
       .catch((err) => console.error("Failed to load animation:", err));
@@ -114,25 +115,23 @@ export default function Editmenus() {
   }));
 };
 
+useEffect(() => {
+  setIsClient(true);
+}, []);
   return (
     <Layout role="admin">
-      <div className="bg-amber-50 max-h-[100vh] lg:max-h-[70vh] scroll-auto rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center gap-3">
+      <div className="bg-amber-50 max-h-[100vh] lg:max-h-[70vh] scroll-auto rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-center lg:items-center gap-3">
         <div className="image">
-          {formIMG ? (
-            <Lottie
-              animationData={formIMG}
-              loop
-              autoplay
-              className="lg:min-w-[50rem] md:max-w-[40rem]"
-            />
-          ) : (
-            // <p className="text-amber-700">Loading animation...</p>
-            <Skeleton avatar paragraph={{ rows: 4 }} />
-
-          )}
+           {formIMG ? (
+  <Lottie animationData={formIMG} loop autoplay className="min-w-[10rem] lg:min-w-[40rem] md:max-w-[20rem]" />
+) : isClient ? (
+  <Skeleton avatar paragraph={{ rows: 4 }} />
+) : (
+  <div className="text-amber-700">Loading...</div>
+)}
         </div>
 
-        <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg w-full max-w-xl">
+        <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg w-full max-w-xl lg:p-20">
           <div>
             <label className="text-amber-950 block mb-1">Customer Name:</label>
             <input

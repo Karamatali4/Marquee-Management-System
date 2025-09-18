@@ -76,6 +76,7 @@ export default function EditBooking() {
   const booking = useLoaderData<Booking>();
   const navigate = useNavigate();
   const [formIMG, setAnimationData] = useState(null);
+const [isClient, setIsClient] = useState(false);
 
   const [formData, setFormData] = useState({
     name: booking.name,
@@ -87,7 +88,7 @@ export default function EditBooking() {
   });
 console.log("booking data: ", booking);
   useEffect(() => {
-    fetch("/LoginandSignup.json")
+    fetch("/Eventvenue2.json")
       .then((res) => res.json())
       .then((data) => setAnimationData(data))
       .catch((err) => console.error("Failed to load animation:", err));
@@ -114,32 +115,30 @@ console.log("booking data: ", booking);
   }));
 };
 
+useEffect(() => {
+  setIsClient(true);
+}, []);
   return (
     <Layout role="admin">
-      <div className="bg-amber-50 max-h-[100vh] lg:max-h-[70vh] scroll-auto rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center gap-3">
+      <div className="bg-amber-50 max-h-[100vh] lg:max-h-[70vh] scroll-auto rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-center lg:items-center gap-3">
         <div className="image">
           {formIMG ? (
-            <Lottie
-              animationData={formIMG}
-              loop
-              autoplay
-              className="lg:min-w-[50rem] md:max-w-[40rem]"
-            />
-          ) : (
-            // <p className="text-amber-700">Loading animation...</p>
-            <Skeleton avatar paragraph={{ rows: 4 }} />
-            
-          )}
+  <Lottie animationData={formIMG} loop autoplay className="min-w-[10rem] lg:min-w-[30rem] md:max-w-[20rem]" />
+) : isClient ? (
+  <Skeleton avatar paragraph={{ rows: 4 }} />
+) : (
+  <div className="text-amber-700">Loading...</div>
+)}
+
         </div>
 
-        <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg w-full max-w-xl">
+        <Form method="post" className="space-y-4 m-5 bg-amber-50 flex flex-col gap-3 shadow-lg w-full max-w-xl p-8 lg:p-16">
           <div>
             <label className="text-amber-950 block mb-1">Booking Name:</label>
             <input
               type="text"
               name="name"
               value={formData.name}
-              defaultValue={booking.name}
               onChange={handleChange}
               className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded w-full px-3 py-2"
               placeholder="Enter Booking Name"
@@ -179,7 +178,6 @@ console.log("booking data: ", booking);
               name="hallType"
               
               value={formData.hallType}
-              defaultValue={booking.hallType}
               onChange={handleChange}
               className="text-amber-950 bg-transparent border border-amber-300 outline-none rounded w-full px-3 py-2"
               required

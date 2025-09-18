@@ -112,16 +112,16 @@ if ((fetcher.data as { status?: string })?.status === "error") {
 
   return (
     <Layout role="admin">
-      <section className="bg-white ">
+      <section className="bg-white max-h-[100vh] lg:max-h-[70vh] ">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
               <div className="max-w-full overflow-x-auto  overflow-y-auto shadow-xl rounded-xl custom-scroll" style={styles.scrollbar} >
                 <div
-  className="overflow-y-auto shadow-xl rounded-xl max-h-[70vh] custom-scroll"
+  className="overflow-y-auto shadow-xl rounded-xl max-h-[70vh] "
 >
 
-                <table className="table-auto w-full border max-h-[70vh] border-gray-200">
+                <table className="table-auto w-full border max-h-[100%] border-gray-200">
                   <thead className="sticky top-0 z-10 ">
                     <tr className="bg-amber-800 text-amber-50 pb-5 mb-5">
                       {[

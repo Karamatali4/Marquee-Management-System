@@ -63,6 +63,7 @@ export default function EditSalary() {
   const salary = useLoaderData<Salary>();
  const navigate = useNavigate();
 const [formIMG, setAnimationData] = useState(null);
+const [isClient, setIsClient] = useState(false);
 
 const [formData, setFormData] = useState({
   employeeName: salary.employeeName,
@@ -96,24 +97,21 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
   }));
 };
 
-
+useEffect(() => {
+  setIsClient(true);
+}, []);
 
   return (
     <Layout role="admin">
     <div className=" bg-amber-50 max-h-[70vh] rounded-s-2xl shadow flex flex-col lg:flex-row justify-center items-center gap-6 mt-5">
       <div className="image">
             {formIMG ? (
-    <Lottie
-      animationData={formIMG}
-      loop
-      autoplay
-      className="lg:w-[30rem] shadow-lg"
-    />
-  ) : (
-    // <p className="text-amber-700">Loading animation...</p>
-            <Skeleton avatar paragraph={{ rows: 4 }} />
-
-  )}
+  <Lottie animationData={formIMG} loop autoplay className="lg:min-w-[50rem] md:max-w-[40rem]" />
+) : isClient ? (
+  <Skeleton avatar paragraph={{ rows: 4 }} />
+) : (
+  <div className="text-amber-700">Loading...</div>
+)}
 
          
    
