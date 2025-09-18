@@ -1,6 +1,7 @@
 import { json, LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Skeleton } from "antd";
+import Lottie from "lottie-react";
 import Layout from "~/components/Layout";
 import { getSession } from "~/session.server";
 
@@ -96,6 +97,7 @@ function AdminProfile() {
                     alt="contact image"
                   />
                   ) : (<Skeleton avatar paragraph={{ rows: 4 }} />)}
+                  
                   
                 </div>
               </div>

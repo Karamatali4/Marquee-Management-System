@@ -68,7 +68,7 @@ const [formData, setFormData] = useState({
 });
 
  useEffect(() => {
-  fetch("/LoginandSignup.json")
+  fetch("/grocery.json")
     .then((res) => res.json())
     .then((data) => setAnimationData(data))
     .catch((err) => console.error("Failed to load animation:", err));
@@ -95,10 +95,10 @@ useEffect(() => {
   return (
     <Layout role="admin">
       
-    <div className=" bg-amber-50 max-h-[100vh] lg:max-h-[70vh]  scroll-auto  rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center gap-3 ">
+    <div className=" bg-amber-50 max-h-[100vh] lg:max-h-[70vh]  scroll-auto  rounded-s-2xl shadow flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-center gap-3 lg:p-20">
       <div className="image">
      {formIMG ? (
-  <Lottie animationData={formIMG} loop autoplay className="min-w-[10rem] lg:min-w-[30rem] md:max-w-[20rem]" />
+  <Lottie animationData={formIMG} loop autoplay className="min-w-[10rem] lg:min-w-[50rem] md:max-w-[20rem]" />
 ) : isClient ? (
   <Skeleton avatar paragraph={{ rows: 4 }} />
 ) : (
