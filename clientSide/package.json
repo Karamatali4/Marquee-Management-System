@@ -11,6 +11,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.8.10",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@remix-run/node": "^2.16.8",
     "@remix-run/react": "^2.16.8",
@@ -24,6 +25,10 @@
     "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.525.0",
+    "rc-queue-anim": "^2.0.0",
+    "rc-resize-observer": "^1.4.3",
+    "rc-scroll-anim": "^2.7.6",
+    "rc-tween-one": "^3.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
