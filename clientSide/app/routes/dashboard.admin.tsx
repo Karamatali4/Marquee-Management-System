@@ -9,7 +9,9 @@ import { ProCard } from '@ant-design/pro-components';
 import {  Statistic } from 'antd';
 import RcResizeObserver from 'rc-resize-observer';
 import { useEffect, useState } from 'react';
-import TweenOne from 'rc-tween-one';
+import { motion } from 'framer-motion';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+
 
 
 const { Divider } = ProCard;
@@ -94,6 +96,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
 export default function AdminDashboard() {
   // const { role, user } = useLoaderData<{ role: string; user: User }>();
   const { role, stats } = useLoaderData<{
@@ -114,20 +119,29 @@ useEffect(() => {
 
   const [responsive, setResponsive] = useState(false);
   
-  
+  const pieData = [
+  { name: 'Users', value: stats.users.count },
+  { name: 'Bookings', value: stats.bookings.count },
+  { name: 'Menu', value: stats.menu.count },
+  { name: 'Groceries', value: stats.groceries.count },
+];
   return (
     <Layout role={role}>
       
 
       <div className="h-screen overflow-y-auto">
-        {/* <TweenOne
-    animation={{ x: 0, opacity: 1, duration: 600 }}
-    style={{ transform: 'translateX(-100%)', opacity: 0 }}
-    className="bg-amber-500 text-white p-4 rounded-md"
-  > */}
+    
+<motion.div
+  initial={{ y: -1000, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.4 }}
+>
+
+
 
       {
         isClient ? (
+     
   <RcResizeObserver
       key="resize-observer"
       onResize={(offset) => {
@@ -152,11 +166,37 @@ useEffect(() => {
         </ProCard>
       </ProCard.Group>
     </RcResizeObserver>
+    
 ) : (
   <div className="text-amber-700">Loading...</div>
 )
       }
-      {/* </TweenOne> */}
+    
+    </motion.div>
+
+
+
+<div >
+  <PieChart width={450} height={300}>
+    <Pie
+      data={pieData}
+      cx="50%"
+      cy="50%"
+      labelLine={false}
+      outerRadius={100}
+      fill="#8884d8"
+      dataKey="value"
+      label={({ name, percent }) => `${name}: ${((percent as number) * 100).toFixed(0)}%`}
+    >
+      {pieData.map((entry, index) => (
+        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+      ))}
+    </Pie>
+    <Tooltip />
+    <Legend />
+  </PieChart>
+</div>
+
       </div>
       
     </Layout>
