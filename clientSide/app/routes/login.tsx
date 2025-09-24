@@ -1,7 +1,7 @@
 
 import { json, redirect } from "@remix-run/node";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
+import { useActionData, useSearchParams } from "@remix-run/react";
 import axios from "axios";
 import LoginForm from "~/components/LoginForm";
 import { toast } from "react-toastify";
@@ -12,35 +12,7 @@ interface ActionData {
   error?: string;
 }
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const form = await request.formData();
-//   const username = form.get("username") as string;
-//   const password = form.get("password") as string;
 
-//   try {
-//     const response = await axios.post("http://localhost:5000/api/auth/login", {
-//       username,
-//       password,
-//     });
-
-//     const { token, role,userId } = response.data;
-// const user = response.data;
-//     const session = await getSession(request.headers.get("Cookie"));
-//     session.set("token", token);
-//     session.set("role", role);
-//     session.set("userId", userId);
-//     session.set("user", user);
-//     return redirect(`/dashboard/${role}`, {
-//       headers: {
-//         "Set-Cookie": await commitSession(session),
-//       },
-//     });
-//   } catch (error: any) {
-//     const message =
-//       error.response?.data?.error || "Login failed. Please try again.";
-//     return json<ActionData>({ error: message }, { status: 400 });
-//   }
-// };
 
 
 
@@ -93,6 +65,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Login() {
   const actionData = useActionData<ActionData>();
+const [params] = useSearchParams();
+  const expired = params.get("expired");
 
   useEffect(() => {
     if (actionData?.error) {
@@ -100,6 +74,11 @@ export default function Login() {
     }
     
   }, [actionData]);
+useEffect(() => {
+    if (expired) {
+      toast.info("Session expired. Please login again.");
+    }
+  }, [expired]);
 
   
   return <LoginForm error={actionData?.error} />;
