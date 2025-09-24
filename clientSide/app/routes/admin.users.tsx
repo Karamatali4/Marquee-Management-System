@@ -112,7 +112,7 @@ if ((fetcher.data as { status?: string })?.status === "error") {
 
   return (
     <Layout role="admin">
-      <section className="bg-white max-h-[100vh] lg:max-h-[70vh] ">
+      <section className="bg-white max-h-[90vh] lg:max-h-[90vh] h-[90vh]">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
             <div className="w-full px-4">
