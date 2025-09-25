@@ -100,6 +100,7 @@ const styles: { scrollbar: React.CSSProperties } = {
   scrollbar: {
     overflowY: "scroll",
     scrollBehavior: "smooth",
+    scrollbarColor:"#ff7e00"
     
   },
 };
@@ -121,7 +122,7 @@ export default function AdminDashboard() {
     setIsClient(true);
   }, []);
 
-  const pieData = [
+  const dataValues = [
     { name: 'Users', value: stats.users.count },
     { name: 'Bookings', value: stats.bookings.count },
     { name: 'Menu', value: stats.menu.count },
@@ -169,10 +170,10 @@ export default function AdminDashboard() {
         </motion.div>
 
         {/* Scrollable Chart Section */}
-        <div className="px-4 space-y-4 sm:flex-1 sm:overflow-y-auto" style={styles.scrollbar}>
+        <div className="px-4 space-y-4 sm:flex-1 sm:overflow-y-auto custom-scroll" style={styles.scrollbar}>
           <PieChart width={450} height={300}>
             <Pie
-              data={pieData}
+              data={dataValues}
               cx="50%"
               cy="50%"
               labelLine={false}
@@ -181,7 +182,7 @@ export default function AdminDashboard() {
               dataKey="value"
               label={({ name, percent }) => `${name}: ${((percent as number) * 100).toFixed(0)}%`}
             >
-              {pieData.map((entry, index) => (
+              {dataValues.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -190,7 +191,7 @@ export default function AdminDashboard() {
           </PieChart>
 
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={pieData}>
+            <BarChart data={dataValues}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -201,7 +202,7 @@ export default function AdminDashboard() {
           </ResponsiveContainer>
 
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={pieData}>
+            <LineChart data={dataValues}>
               <CartesianGrid stroke="#ccc" />
               <XAxis dataKey="name" />
               <YAxis />
@@ -212,7 +213,7 @@ export default function AdminDashboard() {
           </ResponsiveContainer>
 
           <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={pieData}>
+            <AreaChart data={dataValues}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
@@ -227,7 +228,7 @@ export default function AdminDashboard() {
             </AreaChart>
           </ResponsiveContainer>
 
-          <RadarChart outerRadius={90} width={450} height={300} data={pieData}>
+          <RadarChart outerRadius={90} width={450} height={300} data={dataValues}>
             <PolarGrid />
             <PolarAngleAxis dataKey="name" />
             <PolarRadiusAxis />
@@ -236,7 +237,7 @@ export default function AdminDashboard() {
           </RadarChart>
 
           <ResponsiveContainer width="100%" height={300}>
-            <ComposedChart data={pieData}>
+            <ComposedChart data={dataValues}>
               <CartesianGrid stroke="#f5f5f5" />
               <XAxis dataKey="name" />
               <YAxis />
