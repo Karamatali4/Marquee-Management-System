@@ -78,10 +78,10 @@ export default function SalaryForm() {
   return (
     <Layout role={role}>
       <section
-        className="h-full w-[100%] m-auto flex justify-evenly items-center rounded-md"
+        className="lg:h-full w-[100%] h-[90vh] m-auto flex lg:flex-row flex-col  justify-evenly items-center rounded-md"
         style={containerStyle}
       >
-        <h1 className="text-amber-500 font-bold text-4xl bg-opacity-35">
+        <h1 className="text-amber-500 mt-7 font-bold text-center text-4xl bg-opacity-35">
           Please Fill Salary Form
         </h1>
 
