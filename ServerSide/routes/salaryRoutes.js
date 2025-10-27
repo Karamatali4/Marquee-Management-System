@@ -4,7 +4,7 @@ const {
   authMiddleware,
   staffMiddleware,
 } = require("../middleware/authMiddleware");
-const { createSalaryData, getSalaryData } = require("../controllers/salryController");
+const { createSalaryData, getSalaryData } = require("../controllers/salaryController");
 
 salaryRoutes.get("/", authMiddleware, staffMiddleware,getSalaryData);
 
